@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "373991374866",
+    "project_id": "withearth-8c9ac",
+    "storage_bucket": "withearth-8c9ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373991374866:android:ec02dfb42e2675d6f998cb",
+        "android_client_info": {
+          "package_name": "com.example.withearth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373991374866-rga4gg0fvc70sh8h52hedcrd2upk06nm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.withearth",
+            "certificate_hash": "e161d98a61d622d723a8e12e7809c85725675365"
+          }
+        },
+        {
+          "client_id": "373991374866-ccd9laljkq39i0t4rnfvbsc0ea4c9hiu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDK_GjgttnyFFOM9wM31T_su9XaWlYCTHk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373991374866-ccd9laljkq39i0t4rnfvbsc0ea4c9hiu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

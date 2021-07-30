@@ -13,6 +13,13 @@ public class StoreActivity extends Fragment {
     
     private View view;
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override
