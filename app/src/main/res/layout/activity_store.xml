@@ -1,49 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="20dp"
-    android:layout_marginStart="15dp"
-    android:layout_marginEnd="15dp"
-    app:cardElevation="15dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/product_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="제품 이름"
-            android:textAlignment="center"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            />
-        <ImageView
-            android:id="@+id/product_image"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@id/product_name"
-            android:scaleType="centerCrop"
-            android:background="@color/black"
-            android:layout_marginTop="2dp"/>
-
-        <TextView
-            android:id="@+id/product_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/product_image"
-            android:text="제품 설명"
-            android:textAlignment="center"
-            android:textSize="16dp"
-            android:textColor="@color/black"
-            />
-    </RelativeLayout>
-
-
-
-
-</androidx.cardview.widget.CardView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="300dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:id="@+id/recyclerView"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
