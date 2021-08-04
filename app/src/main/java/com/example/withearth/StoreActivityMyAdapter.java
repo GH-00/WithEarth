@@ -1,6 +1,7 @@
 package com.example.withearth;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,21 @@ public class StoreActivityMyAdapter extends RecyclerView.Adapter<StoreActivityMy
         holder.name.setText(product.name);
         holder.price.setText(product.price);
         Picasso.get().load(product.getImage()).into(holder.imageView);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent;//인텐트 선언
+                intent = new Intent(context, StoreActivityProductDetails.class);
+                intent.putExtra("name", product.getName());
+                intent.putExtra("price", product.getPrice());
+                intent.putExtra("description", product.getDescription());
+                intent.putExtra("image", product.getImage());
+                context.startActivity(intent); //액티비티 열기
+            }
+
+        });
 
     }
 

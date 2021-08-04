@@ -12,7 +12,10 @@
         android:theme="@style/Theme.WithEarth"
         tools:replace="android:appComponentFactory"
         android:appComponentFactory="whateverString">
+        <activity android:name=".StoreActivityProductDetails" />
+
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
