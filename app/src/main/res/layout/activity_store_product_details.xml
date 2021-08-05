@@ -52,6 +52,20 @@
         android:layout_marginTop="10dp"
         />
 
+    <Button
+        android:id="@+id/add_to_cart_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edge_round"
+        android:layout_margin="15dp"
+        android:layout_alignParentBottom="true"
+        android:text="장바구니에 담기"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+
+        />
+
 
 
 </RelativeLayout>
