@@ -11,8 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WithEarth"
-        tools:replace="android:appComponentFactory">
-        <activity android:name=".StoreActivityCart"></activity>
+        tools:replace="android:appComponentFactory, android:theme">
+        <activity android:name=".StoreActivityConfirmOrder"></activity>
+        <activity android:name=".StoreActivityCart" />
         <activity android:name=".StoreActivityProductDetails" />
         <activity android:name=".MainActivity">
             <intent-filter>

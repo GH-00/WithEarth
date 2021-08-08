@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +35,7 @@ public class StoreActivityProductDetails extends AppCompatActivity {
     private TextView productName;
     private TextView productDescription;
     private Button addToCartButton;
+    private ElegantNumberButton numberButton;
     Context context;
 
 
@@ -43,6 +45,8 @@ public class StoreActivityProductDetails extends AppCompatActivity {
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_product_details);
+
+        numberButton = (ElegantNumberButton) findViewById(R.id.number_btn);
 
         String pName = getIntent().getStringExtra("name");
         String pPrice = getIntent().getStringExtra("price");
@@ -79,6 +83,7 @@ public class StoreActivityProductDetails extends AppCompatActivity {
                 cartMap.put("name", pName);
                 cartMap.put("price", pPrice);
                 cartMap.put("image", pImage);
+                cartMap.put("quantity", numberButton.getNumber());
 
                 //수정필요 ID 혹은 폰번호 받아오기, 회원가입 완성 후 User랑 연동
 

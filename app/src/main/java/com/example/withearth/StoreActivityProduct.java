@@ -2,17 +2,26 @@ package com.example.withearth;
 
 public class StoreActivityProduct {
 
-    String category, name, image, price, pid, description;
+    String category, name, image, price, pid, description, quantity;
 
     public StoreActivityProduct(){}
 
-    public StoreActivityProduct(String category, String name, String image, String price, String pid, String description){
+    public StoreActivityProduct(String category, String name, String image, String price, String pid, String description, String quantity){
         this.category = category;
         this.name = name;
         this.image = image;
         this.price = price;
         this.pid = pid;
         this.description = description;
+        this.quantity = quantity;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public String getDescription() {
