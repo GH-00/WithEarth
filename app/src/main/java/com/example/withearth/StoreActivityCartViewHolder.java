@@ -1,6 +1,7 @@
 package com.example.withearth;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class StoreActivityCartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     public TextView txtProductName, txtProductPrice, txtProductQuantity;
+    public ImageView txtProductImage;
 
     private ItemClickListner itemClickListner;
 
@@ -18,6 +20,7 @@ public class StoreActivityCartViewHolder extends RecyclerView.ViewHolder impleme
         txtProductName = itemView.findViewById(R.id.cart_product_name);
         txtProductPrice = itemView.findViewById(R.id.cart_product_price);
         txtProductQuantity = itemView.findViewById(R.id.cart_product_quantity);
+        txtProductImage = itemView.findViewById(R.id.cart_product_image);
     }
 
     @Override

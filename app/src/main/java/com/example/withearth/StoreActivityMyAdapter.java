@@ -49,13 +49,14 @@ public class StoreActivityMyAdapter extends RecyclerView.Adapter<StoreActivityMy
             @Override
             public void onClick(View view) {
 
-                Intent intent;//인텐트 선언
+                //상품 클릭시 StoreActivityProductDetails로 이동, intent시 상품 정보 전달
+                Intent intent;
                 intent = new Intent(context, StoreActivityProductDetails.class);
                 intent.putExtra("name", product.getName());
                 intent.putExtra("price", product.getPrice());
                 intent.putExtra("description", product.getDescription());
                 intent.putExtra("image", product.getImage());
-                context.startActivity(intent); //액티비티 열기
+                context.startActivity(intent);
             }
 
         });

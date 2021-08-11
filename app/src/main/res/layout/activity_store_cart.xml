@@ -7,14 +7,17 @@
     tools:context=".StoreActivityCart">
 
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/next_process_btn"
-        >
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_above="@+id/total_price"
+></androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_below="@id/cart_list"
+        android:layout_width="match_parent"
+        android:layout_height="80dp" />
 
     <TextView
         android:id="@+id/total_price"
@@ -37,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/edge_round"
-        android:text="Next"
+        android:text="주문하기"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:layout_margin="10dp"

@@ -60,6 +60,17 @@
         android:hint="주소"
         />
 
+    <TextView
+        android:id="@+id/method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="결제 수단 선택"
+        android:layout_below="@+id/shippment_address"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_margin="25dp"
+        android:textStyle="bold"/>
+
     <Button
         android:id="@+id/confirm_final_order_btn"
         android:layout_width="match_parent"

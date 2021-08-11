@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -42,6 +43,7 @@ public class StoreActivityCart extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_store_cart);
 
+        //장바구니 상품 목록 LinearLayout recyclerview 이용
         recyclerView = findViewById(R.id.cart_list);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -50,6 +52,7 @@ public class StoreActivityCart extends AppCompatActivity {
         NextProcessBtn = (Button) findViewById(R.id.next_process_btn);
         txtTotalAmount = (TextView) findViewById(R.id.total_price);
 
+        //주문하기 버튼 누르면 StoreActivityConfirmOrder로 이동, intent로 총 금액 정보 전달
         NextProcessBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,10 +69,11 @@ public class StoreActivityCart extends AppCompatActivity {
 
         super.onStart();
 
+        //장바구니 recyclerview 설정
+
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
         FirebaseRecyclerOptions<StoreActivityCartProduct> options =
                 new FirebaseRecyclerOptions.Builder<StoreActivityCartProduct>()
-                        //회원정보 완성되면 수정하기
                         .setQuery(cartListRef.child("User View").child(auth.getCurrentUser().getUid()).child("Products"),
                                 StoreActivityCartProduct.class).build();
 
@@ -79,13 +83,15 @@ public class StoreActivityCart extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull @NotNull StoreActivityCartViewHolder holder, int position, @NonNull @NotNull StoreActivityCartProduct model) {
                 holder.txtProductName.setText(model.getName());
-                holder.txtProductPrice.setText(model.getPrice());
-                holder.txtProductQuantity.setText(model.getQuantity());
+                holder.txtProductPrice.setText(model.getPrice() + "개");
+                holder.txtProductQuantity.setText(model.getQuantity() + "원");
+                Picasso.get().load(model.getImage()).into(holder.txtProductImage);
 
                 int oneTyprProductTPrice = ((Integer.valueOf(model.getPrice()))) * Integer.valueOf(model.getQuantity());
                 overTotalPrice = overTotalPrice + oneTyprProductTPrice;
                 txtTotalAmount.setText("총"+String.valueOf(overTotalPrice)+"원");
 
+                //상품 클릭시 장바구니에서 삭제 가능
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -111,8 +117,6 @@ public class StoreActivityCart extends AppCompatActivity {
                                                     if (task.isSuccessful()) {
                                                         Toast.makeText(StoreActivityCart.this, "장바구니에서 제거되었습니다.", Toast.LENGTH_SHORT).show();
 
-                                                        /*Intent intent = new Intent(StoreActivityCart.this, StoreActivity.class);
-                                                        startActivity(intent);*/
                                                     }
                                                 }
                                             });

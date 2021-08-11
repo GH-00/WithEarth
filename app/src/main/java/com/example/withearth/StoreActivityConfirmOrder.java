@@ -52,6 +52,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
 
     }
 
+    //배송지 정보 입력, 빈칸일 경우 toast 출력
     private void Check() {
         if(TextUtils.isEmpty(nameEditText.getText().toString())){
             Toast.makeText(this, "이름을 입력하세요.", Toast.LENGTH_SHORT).show();
@@ -68,6 +69,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
 
     }
 
+    //주문 정보 저장 realtime database 이용, Orders 밑에 회원 ID로 저장
     private void ConfirmOrder() {
         final String saveCurrentDate, saveCurrentTime;
         Calendar calForDate = Calendar.getInstance();
@@ -91,6 +93,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull @NotNull Task<Void> task) {
                 if (task.isSuccessful()){
+                    // 주문이 완료될 경우 장바구니 목록을 지움
                     FirebaseDatabase.getInstance().getReference().child("Cart List")
                             .child("User View")
                             .child(auth.getCurrentUser().getUid())

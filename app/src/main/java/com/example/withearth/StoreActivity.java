@@ -50,9 +50,11 @@ public class StoreActivity extends Fragment {
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override
+    //StoreActivity 화면 구성
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.activity_store, container, false);
 
+        // 장바구니 버튼
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
                                    @Override
@@ -62,16 +64,19 @@ public class StoreActivity extends Fragment {
                                    }
                                });
 
+        //로딩 다이얼로그
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
+        //Grid recyclerview 사용
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
+        //상품 데이터 저장 - firestore 사용
         db = FirebaseFirestore.getInstance();
         productArrayList = new ArrayList<StoreActivityProduct>();
         storeActivityMyAdapter = new StoreActivityMyAdapter(getActivity(), productArrayList);
@@ -82,6 +87,7 @@ public class StoreActivity extends Fragment {
 
         return rootView;
     }
+    //firestore에서 상품 데이터 불러오기 (어댑터 = StoreActivityMyAdapter)
     private void EventChangeListener() {
         db.collection("StoreProducts").orderBy("category", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
