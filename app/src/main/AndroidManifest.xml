@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WithEarth"
         tools:replace="android:appComponentFactory, android:theme">
-        <activity android:name=".MyPageActivitySuccessLogin"></activity>
+        <activity android:name=".StoreActivityConfirmOrder"></activity>
+        <activity android:name=".MyPageActivitySuccessLogin" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".StoreActivityConfirmOrder" />
         <activity android:name=".StoreActivityCart" />
         <activity android:name=".StoreActivityProductDetails" />
         <activity android:name=".MainActivity">

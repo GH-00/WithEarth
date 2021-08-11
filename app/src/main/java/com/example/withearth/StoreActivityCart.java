@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -32,11 +33,13 @@ public class StoreActivityCart extends AppCompatActivity {
     private Button NextProcessBtn;
     private TextView txtTotalAmount;
     private int overTotalPrice = 0;
+    private FirebaseAuth auth;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        auth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_store_cart);
 
         recyclerView = findViewById(R.id.cart_list);
@@ -46,6 +49,16 @@ public class StoreActivityCart extends AppCompatActivity {
 
         NextProcessBtn = (Button) findViewById(R.id.next_process_btn);
         txtTotalAmount = (TextView) findViewById(R.id.total_price);
+
+        NextProcessBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StoreActivityCart.this, StoreActivityConfirmOrder.class);
+                intent.putExtra("Total Price", String.valueOf(overTotalPrice));
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -57,8 +70,8 @@ public class StoreActivityCart extends AppCompatActivity {
         FirebaseRecyclerOptions<StoreActivityCartProduct> options =
                 new FirebaseRecyclerOptions.Builder<StoreActivityCartProduct>()
                         //회원정보 완성되면 수정하기
-                .setQuery(cartListRef.child("User View").child("01012345678").child("Products"),
-                        StoreActivityCartProduct.class).build();
+                        .setQuery(cartListRef.child("User View").child(auth.getCurrentUser().getUid()).child("Products"),
+                                StoreActivityCartProduct.class).build();
 
         FirebaseRecyclerAdapter<StoreActivityCartProduct, StoreActivityCartViewHolder> adapter
                 = new FirebaseRecyclerAdapter<StoreActivityCartProduct, StoreActivityCartViewHolder>(options) {
@@ -88,7 +101,7 @@ public class StoreActivityCart extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int i) {
                                 if (i == 0) {
                                     cartListRef.child("User View")
-                                            .child("01012345678")
+                                            .child(auth.getCurrentUser().getUid())
                                             .child("Products")
                                             .child(model.getName())
                                             .removeValue()

@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,12 +39,15 @@ public class StoreActivityProductDetails extends AppCompatActivity {
     private ElegantNumberButton numberButton;
     Context context;
 
+    private FirebaseAuth auth;
+
 
     private Intent intent;
 
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        auth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_store_product_details);
 
         numberButton = (ElegantNumberButton) findViewById(R.id.number_btn);
@@ -87,13 +91,13 @@ public class StoreActivityProductDetails extends AppCompatActivity {
 
                 //수정필요 ID 혹은 폰번호 받아오기, 회원가입 완성 후 User랑 연동
 
-                cartListRef.child("User View").child("01012345678").child("Products").child(pName)
+                cartListRef.child("User View").child(auth.getCurrentUser().getUid()).child("Products").child(pName)
                         .updateChildren(cartMap)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull @NotNull Task<Void> task) {
                                 if (task.isSuccessful()){
-                                    cartListRef.child("Admin View").child("01012345678")
+                                    cartListRef.child("Admin View").child(auth.getCurrentUser().getUid())
                                             .child("Products").child(pName)
                                             .updateChildren(cartMap)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
