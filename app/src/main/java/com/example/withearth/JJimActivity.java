@@ -26,14 +26,13 @@ public class JJimActivity extends Fragment {
         view = inflater.inflate(R.layout.activity_jjim, container, false);
 
         jjim_product = (ListView) view.findViewById(R.id.jjim_product);
-        JjimAdapter adapter = new JjimAdapter();
+        /*JjimAdapter adapter = new JjimAdapter();
         Resources res = getResources();
 
         products = new ArrayList<JjimProduct>();
         products.add(new JjimProduct(res.getDrawable(R.drawable.ic_environment) ,"7,000","나뭇잎"));
 
-
-        jjim_product.setAdapter(adapter);
+        jjim_product.setAdapter(adapter);*/
 
         return view;
     }
