@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_crop"
+        android:icon="@drawable/ic_editting"
+        android:title="편집"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_cart"
+        android:icon="@drawable/ic_shopping_cart"
+        android:title="장바구니"
+        app:showAsAction="always"/>
+</menu>

@@ -9,6 +9,10 @@ public class JjimProduct {
     private String name;
     private boolean selectable = true;
 
+    public JjimProduct(){
+
+    }
+
     public JjimProduct(Drawable product_image, String price, String name){
         this.productImage = product_image;
         this.price = price;

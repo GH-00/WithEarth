@@ -9,7 +9,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv_toolbar;
     private Toast message;
 
-
     private HomeActivity activity_home;
     private StoreActivity activity_store;
     private EnvironmentActivity activity_environment;
@@ -35,11 +37,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //툴바 교체
+        //ActionBar actionBar = getSupportActionBar();
+        //actionBar.hide();
+        Toolbar base_toolbar = findViewById(R.id.base_toolbar);
+        setSupportActionBar(base_toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        actionBar.setDisplayShowCustomEnabled(true); //커스터마이징 하기 위해 필요
+        actionBar.setDisplayShowTitleEnabled(false);
+
+
         tv_toolbar = findViewById(R.id.tv_toolbar);
+
 
         bottomNavigationView = findViewById(R.id.bottomNavi);
 
@@ -49,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.action_home:
                         setFrag(0);
+                        tv_toolbar.setText("WithEarth");
                         break;
                     case R.id.action_store:
                         setFrag(1);
@@ -86,22 +96,27 @@ public class MainActivity extends AppCompatActivity {
         ft = fm.beginTransaction();
         switch (n) {
             case 0:
+                ft.setCustomAnimations(R.anim.horizon_enter_from_left,R.anim.horizon_exit_to_right,R.anim.horizon_enter_from_right,R.anim.horizon_exit_to_left);
                 ft.replace(R.id.main_frame, activity_home);
                 ft.commit();
                 break;
             case 1:
+                ft.setCustomAnimations(R.anim.horizon_enter_from_left,R.anim.none);
                 ft.replace(R.id.main_frame, activity_store);
                 ft.commit();
                 break;
             case 2:
+                ft.setCustomAnimations(R.anim.horizon_enter_from_left,R.anim.none);
                 ft.replace(R.id.main_frame, activity_environment);
                 ft.commit();
                 break;
             case 3:
+                ft.setCustomAnimations(R.anim.horizon_enter_from_left,R.anim.none);
                 ft.replace(R.id.main_frame, activity_jjim);
                 ft.commit();
                 break;
             case 4:
+                ft.setCustomAnimations(R.anim.horizon_enter_from_right,R.anim.horizon_exit_to_left,R.anim.horizon_enter_from_left,R.anim.horizon_exit_to_right);
                 ft.replace(R.id.main_frame, activity_mypage);
                 ft.commit();
                 break;
@@ -109,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed() { //back 버튼 두번 누를 시 종료
         long backPressTime = 0;
         long curTime = System.currentTimeMillis();
         long gapTime = curTime - backPressTime;
@@ -127,6 +142,28 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //툴바 아이콘
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_base_menu, menu);
+
+        return true;
+    }
+
+    //툴바 아이콘 클릭 이벤트
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_cart:
+                return true;
+
+            case R.id.action_crop:
+                return true;
+
+            default :
+                return super.onOptionsItemSelected(item) ;
+        }
+    }
 
 
 }

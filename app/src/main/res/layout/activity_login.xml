@@ -36,8 +36,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="로그인"
+        android:textColor="@color/white"
         android:layout_margin="8dp"
         android:backgroundTint="@color/black"
+        android:background="@drawable/edge_round_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_register"
         app:layout_constraintStart_toStartOf="parent" />
@@ -47,8 +49,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="회원가입"
+        android:textColor="@color/white"
         android:layout_margin="8dp"
         android:backgroundTint="@color/black"
+        android:background="@drawable/edge_round_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_login" />

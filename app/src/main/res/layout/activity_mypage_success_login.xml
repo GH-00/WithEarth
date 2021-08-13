@@ -34,7 +34,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:backgroundTint="@color/black"
+        android:background="@drawable/edge_round_black"
         android:text="로그아웃"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@id/textView1"
         app:layout_constraintStart_toStartOf="@id/textView1"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
