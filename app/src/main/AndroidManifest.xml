@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WithEarth"
         tools:replace="android:appComponentFactory, android:theme">
+        <activity android:name=".HomePointInfo"></activity>
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StoreActivityConfirmOrder"></activity>
+        <activity android:name=".StoreActivityConfirmOrder" />
         <activity android:name=".MyPageActivitySuccessLogin" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />

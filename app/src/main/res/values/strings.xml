@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">WithEarth</string>
+
+    //HomePointInfo
+    <string name="point1">
+        \n 포인트 1p는 1원으로 구매시 사용 가능 합니다.
+        \n\n 회원 가입 시 3000가 지급됩니다.
+        \n\n 글 리뷰 작성시 500p, 사진 리뷰 작성 시 1000p가 지급됩니다. </string>
+    <string name="point2">
+        \n  포인트가 적립되면 홈 화면의 게이지 바가 올라갑니다.
+        \n\n 친환경 제품을 구매하여 포인트 적립을 해보세요!    </string>
 </resources>
