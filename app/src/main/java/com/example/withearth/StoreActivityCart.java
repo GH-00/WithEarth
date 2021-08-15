@@ -20,12 +20,22 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.withearth.StoreActivity.orderNum;
 
 
 public class StoreActivityCart extends AppCompatActivity {
@@ -52,16 +62,6 @@ public class StoreActivityCart extends AppCompatActivity {
         NextProcessBtn = (Button) findViewById(R.id.next_process_btn);
         txtTotalAmount = (TextView) findViewById(R.id.total_price);
 
-        //주문하기 버튼 누르면 StoreActivityConfirmOrder로 이동, intent로 총 금액 정보 전달
-        NextProcessBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StoreActivityCart.this, StoreActivityConfirmOrder.class);
-                intent.putExtra("Total Price", String.valueOf(overTotalPrice));
-                startActivity(intent);
-                finish();
-            }
-        });
     }
 
     @Override
@@ -83,13 +83,36 @@ public class StoreActivityCart extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull @NotNull StoreActivityCartViewHolder holder, int position, @NonNull @NotNull StoreActivityCartProduct model) {
                 holder.txtProductName.setText(model.getName());
-                holder.txtProductPrice.setText(model.getPrice() + "개");
-                holder.txtProductQuantity.setText(model.getQuantity() + "원");
+                holder.txtProductPrice.setText(model.getPrice() + "원");
+                holder.txtProductQuantity.setText(model.getQuantity() + "개");
                 Picasso.get().load(model.getImage()).into(holder.txtProductImage);
 
                 int oneTyprProductTPrice = ((Integer.valueOf(model.getPrice()))) * Integer.valueOf(model.getQuantity());
                 overTotalPrice = overTotalPrice + oneTyprProductTPrice;
-                txtTotalAmount.setText("총"+String.valueOf(overTotalPrice)+"원");
+                txtTotalAmount.setText("총" + String.valueOf(overTotalPrice)+"원");
+
+                //주문하기 버튼 누르면 StoreActivityConfirmOrder로 이동
+                NextProcessBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        DatabaseReference orderProductRef = FirebaseDatabase.getInstance().getReference()
+                                .child("Orders").child(auth.getCurrentUser().getUid()).child(String.valueOf(orderNum));
+
+                        HashMap<String, Object> totalPriceMap = new HashMap<>();
+                        //orderProductMap.put("name", model.getName());
+                        //orderProductMap.put("price", model.getPrice());
+                        //orderProductMap.put("image", model.getImage());
+                        //orderProductMap.put("quantity", model.getQuantity());
+                        totalPriceMap.put("total", String.valueOf(overTotalPrice));
+                        orderProductRef.updateChildren(totalPriceMap);
+
+                        Intent intent = new Intent(StoreActivityCart.this, StoreActivityConfirmOrder.class);
+                        //intent.putExtra("current time", currentDateTime);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
 
                 //상품 클릭시 장바구니에서 삭제 가능
                 holder.itemView.setOnClickListener(new View.OnClickListener() {

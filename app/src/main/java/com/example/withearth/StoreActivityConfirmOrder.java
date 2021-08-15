@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,12 +24,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import static com.example.withearth.StoreActivity.orderNum;
+
 public class StoreActivityConfirmOrder extends AppCompatActivity {
 
     private EditText nameEditText, phoneEditText, addressEditText;
     private Button confirmOrderBtn;
-    private String totalAmount = "";
     private FirebaseAuth auth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_store_confirm_order);
 
-        totalAmount = getIntent().getStringExtra("Total Price");
+        //currentTime = getIntent().getStringExtra("current time");
 
         confirmOrderBtn = (Button) findViewById(R.id.confirm_final_order_btn);
         nameEditText = (EditText) findViewById(R.id.shippment_name);
@@ -71,23 +74,13 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
 
     //주문 정보 저장 realtime database 이용, Orders 밑에 회원 ID로 저장
     private void ConfirmOrder() {
-        final String saveCurrentDate, saveCurrentTime;
-        Calendar calForDate = Calendar.getInstance();
 
-        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
-        saveCurrentDate = currentDate.format(calForDate.getTime());
-
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentTime = currentTime.format(calForDate.getTime());
-        final DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders")
-                .child(auth.getCurrentUser().getUid());
+        DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders")
+                .child(auth.getCurrentUser().getUid()).child(String.valueOf(orderNum));
         HashMap<String, Object> ordersMap = new HashMap<>();
-        ordersMap.put("totalAmount", totalAmount);
         ordersMap.put("name", nameEditText.getText().toString());
         ordersMap.put("phone", phoneEditText.getText().toString());
         ordersMap.put("address", addressEditText.getText().toString());
-        ordersMap.put("date", saveCurrentDate);
-        ordersMap.put("time", saveCurrentTime);
 
         ordersRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -102,7 +95,14 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull @NotNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(StoreActivityConfirmOrder.this, "정상적으로 처리되었습니다.", Toast.LENGTH_SHORT).show();
+                                        FirebaseDatabase.getInstance().getReference().child("Orders")
+                                                .child(auth.getCurrentUser().getUid())
+                                                .child("product")
+                                                .removeValue();
+                                        Intent intent = new Intent(StoreActivityConfirmOrder.this, StoreActivityOrderSuccess.class);
+                                        //intent.putExtra("current time", currentTime);
+                                        startActivity(intent);
+                                        finish();
 
 
                                     }
@@ -113,6 +113,11 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
                 }
             }
         });
+
+        //ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders")
+        //      .child(auth.getCurrentUser().getUid()).child("dateTime");
+
+
 
     }
 }

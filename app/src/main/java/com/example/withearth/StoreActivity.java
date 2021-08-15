@@ -34,6 +34,7 @@ public class StoreActivity extends Fragment {
     private StoreActivityMyAdapter storeActivityMyAdapter;
     private FirebaseFirestore db;
     private ProgressDialog progressDialog;
+    static int orderNum;
 
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {

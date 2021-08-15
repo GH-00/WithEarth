@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,79 +8,204 @@
     android:layout_height="match_parent"
     tools:context=".StoreActivityConfirmOrder">
 
-    <TextView
-        android:id="@+id/txt"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="결제하기"
-        android:textSize="30dp"
-        android:textColor="@color/black"
-        android:layout_margin="25dp"
-        android:textStyle="bold"/>
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="배송지 정보 입력"
-        android:layout_below="@+id/txt"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:layout_margin="25dp"
-        android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="결제하기"
+            android:textSize="30dp"
+            android:textColor="@color/black"
+            android:layout_margin="25dp"
+            android:textStyle="bold"/>
 
-    <EditText
-        android:id="@+id/shippment_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txt"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="이름"
-        />
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="배송지 정보 입력"
+            android:layout_below="@+id/txt"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_margin="25dp"
+            android:textStyle="bold"/>
 
-    <EditText
-        android:id="@+id/shippment_phone_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/shippment_name"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="전화번호"
-        />
-    <EditText
-        android:id="@+id/shippment_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/shippment_phone_number"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="주소"
-        />
+        <EditText
+            android:id="@+id/shippment_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="이름"
+            />
 
-    <TextView
-        android:id="@+id/method"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="결제 수단 선택"
-        android:layout_below="@+id/shippment_address"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:layout_margin="25dp"
-        android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/shippment_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/shippment_name"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="전화번호"
+            />
+        <EditText
+            android:id="@+id/shippment_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/shippment_phone_number"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="주소"
+            />
 
-    <Button
-        android:id="@+id/confirm_final_order_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
-        android:text="결제하기"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        />
+        <TextView
+            android:id="@+id/method"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="결제 방법"
+            android:layout_below="@+id/shippment_address"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="25dp"
+            android:textStyle="bold"/>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/method2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="무통장 입금"
+            android:layout_below="@+id/method"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/method3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="포인트 사용"
+            android:layout_below="@+id/method2"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="25dp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/use_point_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="포인트"
+            android:layout_below="@+id/method3"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/use_point_btn"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="사용하기"
+            android:layout_below="@+id/method3"
+            android:layout_toEndOf="@+id/use_point_et"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/remain_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="잔여 포인트: "
+            android:layout_below="@+id/use_point_et"
+            android:textColor="@color/black"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/remain_point_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="잔여 포인트"
+            android:layout_below="@+id/use_point_et"
+            android:layout_toEndOf="@+id/remain_point"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="P"
+            android:layout_below="@+id/use_point_et"
+            android:layout_toEndOf="@+id/remain_point_tv"
+            android:textColor="@color/black"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/method4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="총 결제금액"
+            android:layout_below="@+id/remain_point_tv"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="25dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/total_price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="가격"
+            android:layout_toStartOf="@+id/won"
+            android:layout_below="@+id/remain_point_tv"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="25dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/won"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="원"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/remain_point_tv"
+            android:layout_marginRight="25dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"/>
+
+
+
+        <Button
+            android:id="@+id/confirm_final_order_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="20dp"
+            android:text="결제하기"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            />
+
+    </RelativeLayout>
+
+</ScrollView>

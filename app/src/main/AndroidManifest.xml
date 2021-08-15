@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WithEarth"
         tools:replace="android:appComponentFactory, android:theme">
-        <activity android:name=".HomePointInfo"></activity>
+        <activity android:name=".StoreActivityOrderSuccess"></activity>
+        <activity android:name=".HomePointInfo" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

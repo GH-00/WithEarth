@@ -19,8 +19,11 @@ import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
@@ -29,6 +32,9 @@ import org.jetbrains.annotations.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+
+import static com.example.withearth.StoreActivity.orderNum;
+
 
 public class StoreActivityProductDetails extends AppCompatActivity {
     private ImageView productImage;
@@ -50,6 +56,39 @@ public class StoreActivityProductDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         auth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_store_product_details);
+
+        DatabaseReference numListRef = FirebaseDatabase.getInstance().getReference();
+        numListRef.child("Orders").child(auth.getCurrentUser().getUid()).child("ordernum")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        int value = snapshot.getValue(int.class);
+                        orderNum = value;
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
+
+        /*DatabaseReference numListRef = FirebaseDatabase.getInstance().getReference().child("Orders")
+                .child(auth.getCurrentUser().getUid());
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                if(snapshot.child("ordernum").exists()){
+                    String sorderNum =snapshot.getValue().toString();
+                    orderNum = Integer.parseInt(sorderNum);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        };*/
 
         numberButton = (ElegantNumberButton) findViewById(R.id.number_btn);
 
@@ -77,49 +116,58 @@ public class StoreActivityProductDetails extends AppCompatActivity {
         purchaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //시간 정보 받아오기
-                    String saveCurrentTime, saveCurrentDate;
-                    Calendar calForDate = Calendar.getInstance();
 
-                    SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
-                    saveCurrentDate = currentDate.format(calForDate.getTime());
+                final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
 
-                    SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-                    saveCurrentTime = currentDate.format(calForDate.getTime());
+                //구매 정보 저장 시 realtime database 사용, Cart List 밑에 User View와 Admin View 생성
+                final HashMap<String, Object> cartMap = new HashMap<>();
+                cartMap.put("name", pName);
+                cartMap.put("price", pPrice);
+                cartMap.put("image", pImage);
+                String pQuantity = numberButton.getNumber();
+                cartMap.put("quantity", pQuantity);
 
-                    final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+                cartListRef.child("User View").child(auth.getCurrentUser().getUid()).child("Products").child(pName)
+                        .updateChildren(cartMap)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    cartListRef.child("Admin View").child(auth.getCurrentUser().getUid())
+                                            .child("Products").child(pName)
+                                            .updateChildren(cartMap);
 
-                    //구매 정보 저장 시 realtime database 사용, Cart List 밑에 User View와 Admin View 생성
-                    final HashMap<String, Object> cartMap = new HashMap<>();
-                    cartMap.put("name", pName);
-                    cartMap.put("price", pPrice);
-                    cartMap.put("image", pImage);
-                    String pQuantity = numberButton.getNumber();
-                    cartMap.put("quantity", pQuantity);
-
-                    cartListRef.child("User View").child(auth.getCurrentUser().getUid()).child("Products").child(pName)
-                            .updateChildren(cartMap)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                    if (task.isSuccessful()){
-                                        cartListRef.child("Admin View").child(auth.getCurrentUser().getUid())
-                                                .child("Products").child(pName)
-                                                .updateChildren(cartMap);
-
-                                    }
                                 }
-                            });
-                    // 상품 구매 시 장바구니 거치지 않고 바로 StoreActivityConfirmOrder로 이동
-                Intent intent = new Intent(StoreActivityProductDetails.this, StoreActivityConfirmOrder.class);
+                            }
+                        });
+                // 상품 구매 시 장바구니 거치지 않고 바로 StoreActivityConfirmOrder로 이동
 
-                //상품 금액 계산, intent로 정보 넘기기
+
+                DatabaseReference orderProductRef = FirebaseDatabase.getInstance().getReference().child("Orders")
+                        .child(auth.getCurrentUser().getUid()).child(String.valueOf(orderNum)).child("product");
+                HashMap<String, Object> orderProductMap = new HashMap<>();
+                orderProductMap.put("name", pName);
+                orderProductMap.put("price", pPrice);
+                orderProductMap.put("image", pImage);
+                orderProductMap.put("quantity", pQuantity);
+                DatabaseReference totalPriceRef = FirebaseDatabase.getInstance().getReference().child("Orders")
+                        .child(auth.getCurrentUser().getUid()).child(String.valueOf(orderNum));
+                HashMap<String, Object> totalPriceMap = new HashMap<>();
+
+
                 int iQuantity = Integer.valueOf(pQuantity).intValue();
                 int iPrice = Integer.valueOf(pPrice).intValue();
                 int tPrice = iQuantity * iPrice;
                 String sPrice = String.valueOf(tPrice);
-                intent.putExtra("Total Price", sPrice);
+                totalPriceMap.put("total", sPrice);
+
+                orderProductRef.child(pName).updateChildren(orderProductMap);
+                totalPriceRef.updateChildren(totalPriceMap);
+
+                Intent intent = new Intent(StoreActivityProductDetails.this, StoreActivityConfirmOrder.class);
+                //intent.putExtra("current time", currentDateTime);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -128,14 +176,6 @@ public class StoreActivityProductDetails extends AppCompatActivity {
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String saveCurrentTime, saveCurrentDate;
-                Calendar calForDate = Calendar.getInstance();
-
-                SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
-                saveCurrentDate = currentDate.format(calForDate.getTime());
-
-                SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-                saveCurrentTime = currentDate.format(calForDate.getTime());
 
                 final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
 
@@ -151,6 +191,15 @@ public class StoreActivityProductDetails extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull @NotNull Task<Void> task) {
                                 if (task.isSuccessful()){
+                                    DatabaseReference orderProductRef = FirebaseDatabase.getInstance().getReference().child("Orders")
+                                            .child(auth.getCurrentUser().getUid()).child(String.valueOf(orderNum)).child("product");
+                                    HashMap<String, Object> orderProductMap = new HashMap<>();
+                                    orderProductMap.put("name", pName);
+                                    orderProductMap.put("price", pPrice);
+                                    orderProductMap.put("image", pImage);
+                                    orderProductMap.put("quantity", numberButton.getNumber());
+                                    orderProductRef.child(pName).updateChildren(orderProductMap);
+
                                     cartListRef.child("Admin View").child(auth.getCurrentUser().getUid())
                                             .child("Products").child(pName)
                                             .updateChildren(cartMap)
