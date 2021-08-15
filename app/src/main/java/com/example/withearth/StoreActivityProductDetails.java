@@ -2,18 +2,23 @@ package com.example.withearth;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,10 +36,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import static com.example.withearth.StoreActivity.orderNum;
-
 
 public class StoreActivityProductDetails extends AppCompatActivity {
     private ImageView productImage;
@@ -46,6 +52,12 @@ public class StoreActivityProductDetails extends AppCompatActivity {
     private ElegantNumberButton numberButton;
     Context context;
 
+    private String pName;
+    private String pPrice;
+    private String pDescription;
+    private String pImage;
+    private String pTime;
+
     private FirebaseAuth auth;
 
 
@@ -56,6 +68,14 @@ public class StoreActivityProductDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         auth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_store_product_details);
+
+        //커스텀 툴바 생성
+        Toolbar base_toolbar = findViewById(R.id.base_toolbar);
+        setSupportActionBar(base_toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         DatabaseReference numListRef = FirebaseDatabase.getInstance().getReference();
         numListRef.child("Orders").child(auth.getCurrentUser().getUid()).child("ordernum")
@@ -93,10 +113,10 @@ public class StoreActivityProductDetails extends AppCompatActivity {
         numberButton = (ElegantNumberButton) findViewById(R.id.number_btn);
 
         //intent로 전달된 상품 정보 받아오기
-        String pName = getIntent().getStringExtra("name");
-        String pPrice = getIntent().getStringExtra("price");
-        String pDescription = getIntent().getStringExtra("description");
-        String pImage = getIntent().getStringExtra("image");
+        pName = getIntent().getStringExtra("name");
+        pPrice = getIntent().getStringExtra("price");
+        pDescription = getIntent().getStringExtra("description");
+        pImage = getIntent().getStringExtra("image");
 
         productImage = (ImageView) findViewById(R.id.product_image_details);
         productDescription = (TextView) findViewById(R.id.product_description_details);
@@ -117,31 +137,30 @@ public class StoreActivityProductDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+                    final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
 
-                //구매 정보 저장 시 realtime database 사용, Cart List 밑에 User View와 Admin View 생성
-                final HashMap<String, Object> cartMap = new HashMap<>();
-                cartMap.put("name", pName);
-                cartMap.put("price", pPrice);
-                cartMap.put("image", pImage);
-                String pQuantity = numberButton.getNumber();
-                cartMap.put("quantity", pQuantity);
+                    //구매 정보 저장 시 realtime database 사용, Cart List 밑에 User View와 Admin View 생성
+                    final HashMap<String, Object> cartMap = new HashMap<>();
+                    cartMap.put("name", pName);
+                    cartMap.put("price", pPrice);
+                    cartMap.put("image", pImage);
+                    String pQuantity = numberButton.getNumber();
+                    cartMap.put("quantity", pQuantity);
 
-                cartListRef.child("User View").child(auth.getCurrentUser().getUid()).child("Products").child(pName)
-                        .updateChildren(cartMap)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                if (task.isSuccessful()){
-                                    cartListRef.child("Admin View").child(auth.getCurrentUser().getUid())
-                                            .child("Products").child(pName)
-                                            .updateChildren(cartMap);
+                    cartListRef.child("User View").child(auth.getCurrentUser().getUid()).child("Products").child(pName)
+                            .updateChildren(cartMap)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        cartListRef.child("Admin View").child(auth.getCurrentUser().getUid())
+                                                .child("Products").child(pName)
+                                                .updateChildren(cartMap);
 
+                                    }
                                 }
-                            }
-                        });
-                // 상품 구매 시 장바구니 거치지 않고 바로 StoreActivityConfirmOrder로 이동
-
+                            });
+                    // 상품 구매 시 장바구니 거치지 않고 바로 StoreActivityConfirmOrder로 이동
 
                 DatabaseReference orderProductRef = FirebaseDatabase.getInstance().getReference().child("Orders")
                         .child(auth.getCurrentUser().getUid()).child(String.valueOf(orderNum)).child("product");
@@ -222,7 +241,105 @@ public class StoreActivityProductDetails extends AppCompatActivity {
             }
         });
 
+        //찜 버튼 누를 시 찜 기능
+        ImageButton btn_jjim = findViewById(R.id.btn_jjim);
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Jjim Menu").child("User1").child("Jjim Lists");
+        databaseReference.child(pName).child("name").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                //파이어 검색 후 상품이 찜에 존재하면
+                String value = snapshot.getValue(String.class);
+                if (value != null) { //상품이 찜에 존재할 시
+                    //버튼 색
+                    btn_jjim.setImageResource(R.drawable.ic_jjim_selected);
+                    btn_jjim.setColorFilter(Color.parseColor("#FFFF1F53"));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                Log.w("getFirebaseDatabase", "Failed to read value-jjimcolor", error.toException());
+            }
+        });
+
+        btn_jjim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //시간 역순 정렬 위한 time 구하기
+                long now = System.currentTimeMillis();
+                Date mDate = new Date(now);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
+                pTime = simpleDateFormat.format(mDate);
+
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Jjim Menu").child("User1").child("Jjim Lists");
+                //databaseReference = databaseReference.child(auth.getCurrentUser().getUid()).child("Jjim Lists").child(pName);
+                databaseReference.child(pName).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        String value = snapshot.getValue(String.class);
+
+                        if (value != null) {
+                            btn_jjim.setImageResource(R.drawable.ic_favorite);
+                            btn_jjim.setColorFilter(Color.parseColor("#FFFF1F53"));
+                            Toast.makeText(StoreActivityProductDetails.this, "\'찜\'을 해제했어요.", Toast.LENGTH_SHORT).show();
+                            postFirebaseDatabase(false, databaseReference);
+                        }
+
+                        else {
+                            btn_jjim.setImageResource(R.drawable.ic_jjim_selected);
+                            btn_jjim.setColorFilter(Color.parseColor("#FFFF1F53"));
+                            Toast.makeText(StoreActivityProductDetails.this, "\'찜\'을 설정했어요.", Toast.LENGTH_SHORT).show();
+                            postFirebaseDatabase(true, databaseReference);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                        Log.w("getFirebaseDatabase", "Failed to read value-jjimbutton", error.toException());
+                    }
+                });
+
+            }
+        });
 
     }
+
+    //상품 삭제, 추가 쉽게 하기
+    public void postFirebaseDatabase(boolean add, DatabaseReference mPostReference) {
+        Map<String, Object> childUpdates = new HashMap<>();
+        Map<String, Object> postValues = null;
+        if (add) {
+            JjimFirebasePost post = new JjimFirebasePost(pImage, pName, pPrice, pTime);
+            postValues = post.toMap();
+        }
+        childUpdates.put(pName, postValues);
+        mPostReference.updateChildren(childUpdates);
+    }
+
+
+    //툴바 뒤로가기 버튼 클릭 시
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(0, 0);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    //백 버튼 누를 시 애니메이션 없애기
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(0, 0);
+    }
+
+
 }
 

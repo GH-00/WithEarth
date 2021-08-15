@@ -37,15 +37,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //툴바 교체
-        //ActionBar actionBar = getSupportActionBar();
-        //actionBar.hide();
+        //커스텀 툴바 생성
         Toolbar base_toolbar = findViewById(R.id.base_toolbar);
         setSupportActionBar(base_toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowCustomEnabled(true); //커스터마이징 하기 위해 필요
+        actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
-
 
         tv_toolbar = findViewById(R.id.tv_toolbar);
 
@@ -142,28 +139,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //툴바 아이콘
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_base_menu, menu);
-
-        return true;
-    }
-
-    //툴바 아이콘 클릭 이벤트
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_cart:
-                return true;
-
-            case R.id.action_crop:
-                return true;
-
-            default :
-                return super.onOptionsItemSelected(item) ;
-        }
-    }
 
 
 }

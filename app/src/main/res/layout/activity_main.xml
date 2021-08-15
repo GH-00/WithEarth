@@ -32,18 +32,6 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <!--<ImageButton
-            android:id="@+id/shoppingcart"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="right"
-            android:layout_marginRight="20dp"
-            android:adjustViewBounds="true"
-            android:backgroundTint="#00FFFFFF"
-            android:scaleType="center"
-            app:srcCompat="@drawable/ic_shopping_cart"
-            app:tint="#292929"
-            tools:ignore="VectorDrawableCompat" />-->
     </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout

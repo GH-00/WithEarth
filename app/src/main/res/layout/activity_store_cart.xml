@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/edge_round"
+        android:background="@drawable/edge_round_black"
         android:text="주문하기"
         android:textColor="@color/white"
         android:textSize="20dp"

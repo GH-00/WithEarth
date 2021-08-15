@@ -1,19 +1,17 @@
 package com.example.withearth;
 
-import  android.graphics.drawable.Drawable;
-
 public class JjimProduct {
 
-    private Drawable productImage;
+    private String productImage;
     private String price;
     private String name;
     private boolean selectable = true;
 
-    public JjimProduct(){
+    public JjimProduct() {
 
     }
 
-    public JjimProduct(Drawable product_image, String price, String name){
+    public JjimProduct(String product_image, String price, String name) {
         this.productImage = product_image;
         this.price = price;
         this.name = name;
@@ -35,15 +33,19 @@ public class JjimProduct {
         this.name = name;
     }
 
-    public void setSelectable(boolean selectable){
-        this.selectable = selectable;
-    }
-
-    public Drawable getProductImage(){
+    public String getProductImage() {
         return productImage;
     }
 
-    public boolean isSelectable(){
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
+    }
+
+    public void setSelectable(boolean selectable) {
+        this.selectable = selectable;
+    }
+
+    public boolean isSelectable() {
         return selectable;
     }
 

@@ -54,7 +54,7 @@
         style="@style/SpinKitView.Large.Circle"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:layout_marginTop="308dp"
+        android:layout_marginTop="300dp"
         app:SpinKit_Color="#CAFFD1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

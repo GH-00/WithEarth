@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".StoreActivityConfirmOrder" />
+        <activity android:name=".JjimActivityEdit" />
         <activity android:name=".MyPageActivitySuccessLogin" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />

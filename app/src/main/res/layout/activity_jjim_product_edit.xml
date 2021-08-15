@@ -8,14 +8,27 @@
     android:background="@drawable/edge_round"
     android:gravity="center"
     android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/iv_image"
-        android:layout_width="112dp"
-        android:layout_height="135dp"
-        android:layout_weight="1"
-        android:background="@drawable/edge_round"
-        android:scaleType="centerCrop" />
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="112dp"
+            android:layout_height="135dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_shopping_cart"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/iv_check"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="right"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_edit_unchecked"/>
+
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
