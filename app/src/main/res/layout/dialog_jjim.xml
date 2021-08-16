@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:gravity="center"
             android:textColor="#606060"
@@ -47,30 +47,32 @@
         android:layout_marginBottom="15dp"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/btn_cancel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="15dp"
             android:background="@drawable/edge_round_green"
             android:gravity="center"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:text="취소"/>
         <Button
+            android:id="@+id/btn_delete"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginRight="30dp"
             android:background="@drawable/edge_round_darkgreen"
             android:gravity="center"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:text="삭제"/>
 
 

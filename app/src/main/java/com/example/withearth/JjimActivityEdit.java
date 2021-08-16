@@ -51,8 +51,6 @@ public class JjimActivityEdit extends AppCompatActivity {
     private JjimAdapterEdit adapter;
     private FirebaseAuth auth;
 
-    public static Toast mToast;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -118,11 +116,17 @@ public class JjimActivityEdit extends AppCompatActivity {
                         break;
 
                     case R.id.action_delete:
-                        AlertDialog.Builder builder = new AlertDialog.Builder(JjimActivityEdit.this);
-                        builder.setTitle("상품 삭제").setMessage("정말 선택하신 상품을 삭제하시겠습니까?").setPositiveButton("삭제", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                if (selected.size() != 0) {
+                        if (selected.size() != 0) {
+                            View dialogView = getLayoutInflater().inflate(R.layout.dialog_jjim, null);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(JjimActivityEdit.this);
+                            builder.setView(dialogView);
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+
+                            Button btn_delete = dialogView.findViewById(R.id.btn_delete);
+                            btn_delete.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
                                     for (int i = (selected.size() - 1); i >= 0; i--)
                                         if (selected.valueAt(i)) {
                                             JjimProduct selectedItem = products.get(selected.keyAt(i));
@@ -131,16 +135,20 @@ public class JjimActivityEdit extends AppCompatActivity {
                                         }
                                     adapter.clearSelectedItem();
                                     Toast.makeText(JjimActivityEdit.this, "찜한 목록에서 선택한 상품을 삭제했어요.", Toast.LENGTH_SHORT).show();
+                                    alertDialog.dismiss();
                                 }
-                            }
-                        }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(JjimActivityEdit.this, "선택한 상품이 없어요.", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                        }).show();
-
+                            });
+                            Button btn_cancel = dialogView.findViewById(R.id.btn_cancel);
+                            btn_cancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Toast.makeText(JjimActivityEdit.this, "삭제를 취소했어요.", Toast.LENGTH_SHORT).show();
+                                    alertDialog.dismiss();
+                                }
+                            });
+                        }
+                        else
+                            Toast.makeText(JjimActivityEdit.this, "선택한 상품이 없어요.", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return true;
@@ -179,21 +187,6 @@ public class JjimActivityEdit extends AppCompatActivity {
                 Log.w("getFirebaseDatabase", "Failed to read value", error.toException());
             }
         });
-    }
-
-    public void checkDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(JjimActivityEdit.this);
-        builder.setTitle("상품 삭제").setMessage("선택하신 상품을 삭제하시겠습니까?").setPositiveButton("삭제", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        }).show();
     }
 
     //툴바
