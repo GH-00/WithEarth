@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,6 +46,7 @@ public class StoreActivity extends Fragment {
     private ProgressDialog progressDialog;
     static int orderNum;
     private Button searchBtn;
+    private ImageButton categoryBtn;
     private EditText searchWord;
 
     @Override
@@ -84,6 +86,7 @@ public class StoreActivity extends Fragment {
 
         searchBtn = (Button) rootView.findViewById(R.id.searchBtn);
         searchWord = (EditText) rootView.findViewById(R.id.searchWord);
+        categoryBtn = (ImageButton) rootView.findViewById(R.id.categoryBtn);
 
         //Grid recyclerview 사용
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -106,6 +109,14 @@ public class StoreActivity extends Fragment {
 
             }
         });
+
+        categoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), StoreActivityCategory.class);
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
 
@@ -125,8 +136,8 @@ public class StoreActivity extends Fragment {
                     }
 
                     storeActivityMyAdapter.notifyDataSetChanged();
-                    }
                 }
+            }
         });
     }
 

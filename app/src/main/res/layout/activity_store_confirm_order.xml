@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -66,34 +66,11 @@
             />
 
         <TextView
-            android:id="@+id/method"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="결제 방법"
-            android:layout_below="@+id/shippment_address"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/method2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="무통장 입금"
-            android:layout_below="@+id/method"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="10dp"/>
-
-        <TextView
             android:id="@+id/method3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="포인트 사용"
-            android:layout_below="@+id/method2"
+            android:layout_below="@+id/shippment_address"
             android:textSize="20dp"
             android:textColor="@color/black"
             android:layout_marginTop="25dp"
@@ -192,9 +169,6 @@
             android:layout_marginTop="25dp"
             android:layout_marginLeft="10dp"
             android:textStyle="bold"/>
-
-
-
         <Button
             android:id="@+id/confirm_final_order_btn"
             android:layout_width="match_parent"
@@ -206,6 +180,9 @@
             android:textSize="20dp"
             />
 
+
     </RelativeLayout>
 
-</ScrollView>
+
+</LinearLayout>
+

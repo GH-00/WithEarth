@@ -21,6 +21,9 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import static com.example.withearth.StoreActivity.orderNum;
@@ -33,6 +36,7 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
     private FirebaseAuth auth;
     private int overTotalPrice = 0;
     private TextView txtTotalAmount;
+    private TextView dateTime;
 
 
     @Override
@@ -48,6 +52,13 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         txtTotalAmount = (TextView) findViewById(R.id.must_charge_tv);
+        dateTime = (TextView) findViewById(R.id.date_tv);
+
+        /*Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 7);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+        String currentDate = dateFormat.format(cal);
+        dateTime.setText(currentDate);*/
 
         DatabaseReference orderListRef = FirebaseDatabase.getInstance().getReference().child("Orders");
         FirebaseRecyclerOptions<StoreActivityOrderProduct> options =
