@@ -17,10 +17,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+
+import static com.example.withearth.StoreActivity.orderNum;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;       //파이어베이스 인증
@@ -67,6 +74,33 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this, MyPageActivitySuccessLogin.class);
                             startActivity(intent);
                             Toast.makeText(LoginActivity.this, "로그인에 성공하였습니다", Toast.LENGTH_SHORT).show();
+                            // 사용자 ordernum 생성
+                            DatabaseReference numListRef = FirebaseDatabase.getInstance().getReference();
+                            numListRef.child("Orders").child(mFirebaseAuth.getCurrentUser().getUid())
+                                    .addValueEventListener(new ValueEventListener(){
+                                        @Override
+                                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                            if (snapshot.hasChild("ordernum")){
+                                                int value = snapshot.child("ordernum").getValue(int.class);
+                                                orderNum = value;
+
+                                            }
+                                            else{
+                                                HashMap<String, Object> numMap = new HashMap<>();
+                                                numMap.put("ordernum", 1);
+                                                numListRef.child("Orders").child(mFirebaseAuth.getCurrentUser().getUid()).updateChildren(numMap);
+                                                orderNum = 1;
+
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                                        }
+                                    });
+
                             finish(); //현재 액티비티(=LoginActivity) 파괴
                         }
                         else {

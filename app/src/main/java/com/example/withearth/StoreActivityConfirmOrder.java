@@ -86,7 +86,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull @NotNull Task<Void> task) {
                 if (task.isSuccessful()){
-                    // 주문이 완료될 경우 장바구니 목록을 지움
+                    // 주문이 완료될 경우 장바구니 목록을 지움, order success로 이동
                     FirebaseDatabase.getInstance().getReference().child("Cart List")
                             .child("User View")
                             .child(auth.getCurrentUser().getUid())
@@ -113,10 +113,6 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
                 }
             }
         });
-
-        //ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders")
-        //      .child(auth.getCurrentUser().getUid()).child("dateTime");
-
 
 
     }

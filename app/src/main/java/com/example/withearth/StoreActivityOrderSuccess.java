@@ -41,6 +41,7 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_store_order_success);
 
+        // 주문 완료 목록 리사이클러뷰 생성, 주문완료 목록 보여줌
         recyclerView = findViewById(R.id.order_list_rv);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -51,7 +52,7 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
         DatabaseReference orderListRef = FirebaseDatabase.getInstance().getReference().child("Orders");
         FirebaseRecyclerOptions<StoreActivityOrderProduct> options =
                 new FirebaseRecyclerOptions.Builder<StoreActivityOrderProduct>()
-                        .setQuery(orderListRef.child(auth.getCurrentUser().getUid()).child(String.valueOf(orderNum)).child("product"),
+                        .setQuery(orderListRef.child(auth.getCurrentUser().getUid()).child(String.valueOf(orderNum)).child("products"),
                                 StoreActivityOrderProduct.class).build();
 
         FirebaseRecyclerAdapter<StoreActivityOrderProduct, StoreActivityOrderViewHolder> adapter
@@ -88,16 +89,23 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //주문 완료시 ordernum 1 증가, Orders 밑에 회원 ID로 저장
+
         orderNum++;
         //FirebaseDatabase database;
         //database = FirebaseDatabase.getInstance();
         //database.getReference().child("Orders").child(auth.getCurrentUser().getUid());
-        DatabaseReference numRef = FirebaseDatabase.getInstance().getReference().child("Orders")
+        DatabaseReference nextnumRef = FirebaseDatabase.getInstance().getReference().child("Orders")
                 .child(auth.getCurrentUser().getUid());
-        HashMap<String, Object> numMap = new HashMap<>();
-        numMap.put("ordernum", orderNum);
-        numRef.updateChildren(numMap);
-
-
+        HashMap<String, Object> nextnumMap = new HashMap<>();
+        nextnumMap.put("ordernum", orderNum);
+        nextnumRef.updateChildren(nextnumMap);
     }
 }

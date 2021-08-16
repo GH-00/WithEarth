@@ -91,24 +91,50 @@ public class StoreActivityCart extends AppCompatActivity {
                 overTotalPrice = overTotalPrice + oneTyprProductTPrice;
                 txtTotalAmount.setText("총" + String.valueOf(overTotalPrice)+"원");
 
-                //주문하기 버튼 누르면 StoreActivityConfirmOrder로 이동
+                // 주문하기 버튼 누르면 StoreActivityConfirmOrder로 이동
+                // Cart List에 담긴 장바구니 목록을 모두 Orders -  회원 ID - order Num -  products로 이동
                 NextProcessBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference()
+                                .child("Cart List").child("User View").child(auth.getCurrentUser().getUid()).child("Products");
+                        orderRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                for (DataSnapshot postSnapshot : snapshot.getChildren()){
+                                    String name = postSnapshot.child("name").getValue(String.class);
+                                    String price = postSnapshot.child("price").getValue(String.class);
+                                    String quantity = postSnapshot.child("quantity").getValue(String.class);
+                                    String image = postSnapshot.child("image").getValue(String.class);
+                                    DatabaseReference orListRef = FirebaseDatabase.getInstance().getReference()
+                                            .child("Orders").child(auth.getCurrentUser().getUid())
+                                            .child(String.valueOf(orderNum)).child("products");
+                                    HashMap<String, Object> orListMap = new HashMap<>();
+                                    orListMap.put("name", name);
+                                    orListMap.put("price", price);
+                                    orListMap.put("quantity", quantity);
+                                    orListMap.put("image", image);
+                                    orListRef.child(name).updateChildren(orListMap);
+                                }
+                            }
 
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                            }
+                        });
+
+
+
+                        // 총 금액 계산 후 추가
                         DatabaseReference orderProductRef = FirebaseDatabase.getInstance().getReference()
                                 .child("Orders").child(auth.getCurrentUser().getUid()).child(String.valueOf(orderNum));
 
                         HashMap<String, Object> totalPriceMap = new HashMap<>();
-                        //orderProductMap.put("name", model.getName());
-                        //orderProductMap.put("price", model.getPrice());
-                        //orderProductMap.put("image", model.getImage());
-                        //orderProductMap.put("quantity", model.getQuantity());
                         totalPriceMap.put("total", String.valueOf(overTotalPrice));
                         orderProductRef.updateChildren(totalPriceMap);
 
                         Intent intent = new Intent(StoreActivityCart.this, StoreActivityConfirmOrder.class);
-                        //intent.putExtra("current time", currentDateTime);
                         startActivity(intent);
                         finish();
                     }
