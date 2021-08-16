@@ -10,6 +10,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,9 +28,11 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Document;
 
 import java.util.ArrayList;
 
@@ -40,6 +44,8 @@ public class StoreActivity extends Fragment {
     private FirebaseFirestore db;
     private ProgressDialog progressDialog;
     static int orderNum;
+    private Button searchBtn;
+    private EditText searchWord;
 
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -61,20 +67,23 @@ public class StoreActivity extends Fragment {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.activity_store, container, false);
 
         // 장바구니 버튼
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
                                    @Override
                                    public void onClick(View view) {
                                        Intent intent = new Intent(getActivity(), StoreActivityCart.class);
                                        startActivity(intent);
                                    }
-                               });
+                               });*/
 
         //로딩 다이얼로그
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
+
+        searchBtn = (Button) rootView.findViewById(R.id.searchBtn);
+        searchWord = (EditText) rootView.findViewById(R.id.searchWord);
 
         //Grid recyclerview 사용
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -90,9 +99,37 @@ public class StoreActivity extends Fragment {
         recyclerView.setAdapter(storeActivityMyAdapter);
         EventChangeListener();
 
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search(searchWord.getText().toString());
 
+            }
+        });
         return rootView;
     }
+
+    //검색 기능, 단어 포함된 항목 검색
+    private void search(String searchWord) {
+        db.collection("StoreProducts").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable @org.jetbrains.annotations.Nullable QuerySnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+                productArrayList.clear();
+                for (DocumentChange dc : value.getDocumentChanges()) {
+
+                    if (dc.getType() == DocumentChange.Type.ADDED){
+                        if (dc.getDocument().getString("name").contains(searchWord)) {
+                            productArrayList.add(dc.getDocument().toObject(StoreActivityProduct.class));
+                        }
+
+                    }
+
+                    storeActivityMyAdapter.notifyDataSetChanged();
+                    }
+                }
+        });
+    }
+
     //firestore에서 상품 데이터 불러오기 (어댑터 = StoreActivityMyAdapter)
     private void EventChangeListener() {
         db.collection("StoreProducts").orderBy("category", Query.Direction.ASCENDING)

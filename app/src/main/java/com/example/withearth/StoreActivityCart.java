@@ -124,8 +124,6 @@ public class StoreActivityCart extends AppCompatActivity {
                             }
                         });
 
-
-
                         // 총 금액 계산 후 추가
                         DatabaseReference orderProductRef = FirebaseDatabase.getInstance().getReference()
                                 .child("Orders").child(auth.getCurrentUser().getUid()).child(String.valueOf(orderNum));
