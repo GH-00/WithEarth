@@ -87,6 +87,11 @@ public class MainActivity extends AppCompatActivity {
         setFrag(0); //첫 프래그먼트 화면은 홈화면 (= 0번 화면)으로 지정
     }
 
+    public void replaceFragment(Fragment fragment){
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_frame, fragment).commit();
+    }
+
     //프래그먼트 교체가 일어나는 실행문
     private void setFrag(int n) {
         fm = getSupportFragmentManager();

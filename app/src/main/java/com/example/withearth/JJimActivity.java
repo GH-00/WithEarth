@@ -51,6 +51,7 @@ public class JJimActivity extends Fragment {
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        auth = FirebaseAuth.getInstance();
         setHasOptionsMenu(true);
 
     }
@@ -61,48 +62,55 @@ public class JJimActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_jjim, container, false);
 
-        ArrayList<JjimProduct> products = new ArrayList<JjimProduct>();
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.jjim_product);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        recyclerView.setHasFixedSize(true);
 
-        JjimAdapter adapter = new JjimAdapter(getContext(), products);
-        recyclerView.setAdapter(adapter);
-        //auth.getCurrentUser().getUid()
+        //로그인 했을 시
+        if(auth.getCurrentUser() != null){
 
-        databaseReference = database.getReference("Jjim Menu").child("User1").child("Jjim Lists");
-        Query sortbyTime = databaseReference.orderByChild("time");
+            ArrayList<JjimProduct> products = new ArrayList<JjimProduct>();
+            RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.jjim_product);
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+            recyclerView.setHasFixedSize(true);
 
-        sortbyTime.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                products.clear();
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    JjimFirebasePost value = postSnapshot.getValue(JjimFirebasePost.class);
-                    products.add(0, new JjimProduct(value.getImage(), value.getPrice(), value.getName()));
+            JjimAdapter adapter = new JjimAdapter(getContext(), products);
+            recyclerView.setAdapter(adapter);
+
+            databaseReference = database.getReference("Jjim Menu").child(auth.getCurrentUser().getUid()).child("Jjim Lists");
+            Query sortbyTime = databaseReference.orderByChild("time");
+
+            sortbyTime.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    products.clear();
+                    for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                        JjimFirebasePost value = postSnapshot.getValue(JjimFirebasePost.class);
+                        products.add(0, new JjimProduct(value.getImage(), value.getPrice(), value.getName()));
+                    }
+                    //찜 상품 수 표시
+                    TextView tv_count = (TextView) view.findViewById(R.id.tv_count);
+                    String count = String.valueOf(adapter.getItemCount());
+                    tv_count.setText(count);
+                    adapter.notifyDataSetChanged();
                 }
-                //찜 상품 수 표시
-                TextView tv_count = (TextView) view.findViewById(R.id.tv_count);
-                String count = String.valueOf(adapter.getItemCount());
-                tv_count.setText(count);
 
-                adapter.notifyDataSetChanged();
-            }
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                    Log.w("getFirebaseDatabase", "Failed to read value", error.toException());
+                }
+            });
 
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-                Log.w("getFirebaseDatabase", "Failed to read value", error.toException());
-            }
-        });
-
-        //최상단 이동 버튼
-        FloatingActionButton btn_up = (FloatingActionButton) view.findViewById(R.id.btn_up);
-        btn_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recyclerView.smoothScrollToPosition(0);
-            }
-        });
+            //최상단 이동 버튼
+            FloatingActionButton btn_up = (FloatingActionButton) view.findViewById(R.id.btn_up);
+            btn_up.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    recyclerView.smoothScrollToPosition(0);
+                }
+            });
+        }
+        else{
+            JjimActivityUnlogin jjimActivityUnlogin = new JjimActivityUnlogin();
+            ((MainActivity)getActivity()).replaceFragment(jjimActivityUnlogin);
+        }
 
         return view;
     }

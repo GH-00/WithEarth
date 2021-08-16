@@ -49,6 +49,7 @@ public class JjimActivityEdit extends AppCompatActivity {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private ArrayList<JjimProduct> products = new ArrayList<JjimProduct>();
     private JjimAdapterEdit adapter;
+    private FirebaseAuth auth;
 
     public static Toast mToast;
 
@@ -56,8 +57,8 @@ public class JjimActivityEdit extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        auth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_jjim_edit);
-        mToast = Toast.makeText(this, "null", Toast.LENGTH_SHORT);
 
         //커스텀 툴바 생성
         Toolbar base_toolbar = findViewById(R.id.base_toolbar);
@@ -75,7 +76,7 @@ public class JjimActivityEdit extends AppCompatActivity {
         adapter.setData(products);
 
         //firebase 불러오기
-        databaseReference = database.getReference("Jjim Menu").child("User1").child("Jjim Lists");
+        databaseReference = database.getReference("Jjim Menu").child(auth.getCurrentUser().getUid()).child("Jjim Lists");
         loadData(products, adapter, databaseReference);
 
         //바텀 네비게이션바 버튼

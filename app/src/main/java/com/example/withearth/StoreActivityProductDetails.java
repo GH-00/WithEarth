@@ -244,7 +244,8 @@ public class StoreActivityProductDetails extends AppCompatActivity {
         //찜 버튼 누를 시 찜 기능
         ImageButton btn_jjim = findViewById(R.id.btn_jjim);
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Jjim Menu").child("User1").child("Jjim Lists");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Jjim Menu")
+                .child(auth.getCurrentUser().getUid()).child("Jjim Lists");
         databaseReference.child(pName).child("name").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -272,7 +273,8 @@ public class StoreActivityProductDetails extends AppCompatActivity {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
                 pTime = simpleDateFormat.format(mDate);
 
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Jjim Menu").child("User1").child("Jjim Lists");
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Jjim Menu")
+                        .child(auth.getCurrentUser().getUid()).child("Jjim Lists");
                 //databaseReference = databaseReference.child(auth.getCurrentUser().getUid()).child("Jjim Lists").child(pName);
                 databaseReference.child(pName).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
