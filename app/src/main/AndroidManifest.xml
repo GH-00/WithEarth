@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WithEarth"
         tools:replace="android:appComponentFactory, android:theme">
-        <activity android:name=".StoreActivityOrderSuccess"></activity>
+        <activity android:name=".MyPageActivityUnlogin"></activity>
+        <activity android:name=".StoreActivityOrderSuccess" />
         <activity android:name=".HomePointInfo" />
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -23,7 +24,6 @@
         </activity>
         <activity android:name=".StoreActivityConfirmOrder" />
         <activity android:name=".JjimActivityEdit" />
-        <activity android:name=".MyPageActivitySuccessLogin" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".StoreActivityCart" />

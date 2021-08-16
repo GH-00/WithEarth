@@ -70,10 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //로그인 성공
-                            //MyPageActivitySuccessLogin으로 이동
-                            Intent intent = new Intent(LoginActivity.this, MyPageActivitySuccessLogin.class);
-                            startActivity(intent);
-                            Toast.makeText(LoginActivity.this, "로그인에 성공하였습니다", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
                             // 사용자 ordernum 생성
                             DatabaseReference numListRef = FirebaseDatabase.getInstance().getReference();
                             numListRef.child("Orders").child(mFirebaseAuth.getCurrentUser().getUid())
@@ -105,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else {
                             //로그인 실패
-                            Toast.makeText(LoginActivity.this, "로그인에 실패하였습니다", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "가입하지 않은 이메일이거나, 잘못된 비밀번호입니다.", Toast.LENGTH_SHORT).show();
 
                         }
 
