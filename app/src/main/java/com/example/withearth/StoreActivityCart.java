@@ -1,8 +1,10 @@
 package com.example.withearth;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -52,6 +55,14 @@ public class StoreActivityCart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         auth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_store_cart);
+
+        //커스텀 툴바 생성
+        Toolbar base_toolbar = findViewById(R.id.base_toolbar);
+        setSupportActionBar(base_toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         //장바구니 상품 목록 LinearLayout recyclerview 이용
         recyclerView = findViewById(R.id.cart_list);
@@ -190,4 +201,20 @@ public class StoreActivityCart extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         adapter.startListening();
     }
+
+
+    //툴바 뒤로가기 버튼 클릭 시
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
 }
