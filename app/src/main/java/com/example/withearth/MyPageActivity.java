@@ -141,6 +141,18 @@ public class MyPageActivity extends Fragment {
             });
 
 
+            //개인정보 수집 및 이용 버튼
+            Button btn_collecting_using = (Button) view.findViewById(R.id.btn_collecting_using);
+            btn_collecting_using.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //MyPageActivityCollectingUsing으로 이동
+                    Intent intent = new Intent(v.getContext(), MyPageActivityCollectingUsing.class);
+                    startActivity(intent);
+                }
+            });
+
+
         }
         //로그인 하지 않았을 시
         else{

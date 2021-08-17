@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WithEarth"
         tools:replace="android:appComponentFactory, android:theme">
-        <activity android:name=".StoreActivitySundries"></activity>
+        <activity android:name=".MyPageActivityCollectingUsing"></activity>
+        <activity android:name=".StoreActivitySundries" />
         <activity android:name=".StoreActivityCosmetic" />
         <activity android:name=".StoreActivityFood" />
         <activity android:name=".StoreActivityClean" />

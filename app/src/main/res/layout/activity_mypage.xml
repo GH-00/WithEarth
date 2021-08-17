@@ -55,14 +55,14 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="363dp"
         android:layout_weight="1">
 
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edge_bottom_line" >
+            android:background="@drawable/edge_bottom_line">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -81,14 +81,23 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
                 android:layout_marginRight="30dp"
+                android:layout_marginBottom="15dp"
                 android:text="Point"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
         </FrameLayout>
+
+        <Button
+            android:id="@+id/btn_collecting_using"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginBottom="200dp"
+            android:text="개인정보 수집 및 이용" />
+
 
     </FrameLayout>
 
