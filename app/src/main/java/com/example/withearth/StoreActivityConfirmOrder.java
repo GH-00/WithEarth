@@ -34,7 +34,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
     private EditText nameEditText, phoneEditText, addressEditText;
     private Button confirmOrderBtn;
     private FirebaseAuth auth;
-    private String point;
+    private int point;
 
 
 
@@ -62,7 +62,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
                 totalRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        point = snapshot.getValue(String.class);
+                        point = snapshot.getValue(int.class);
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -74,9 +74,9 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
                         .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                        int totalint = Integer.parseInt(point);
-                        double finalpoint = Math.floor(totalint * 0.05);
-                        point = String.valueOf(finalpoint);
+                       // int totalint = Integer.parseInt(point);
+                        double finalpoint = Math.floor(point * 0.05);
+                        point = (int) finalpoint;
                     }
 
                     @Override
@@ -87,7 +87,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
 
                 DatabaseReference pointRef = FirebaseDatabase.getInstance().getReference().child("Point");
                 HashMap<String, Object> pointMap = new HashMap<>();
-                pointMap.put("point", 3000);
+                pointMap.put("point", point);
                 pointRef.child(auth.getCurrentUser().getUid()).updateChildren(pointMap);
 
             }
