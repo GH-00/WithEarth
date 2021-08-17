@@ -38,7 +38,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.withearth.StoreActivity.orderNum;
 
 
 public class StoreActivityCart extends AppCompatActivity {
@@ -48,6 +47,7 @@ public class StoreActivityCart extends AppCompatActivity {
     private TextView txtTotalAmount;
     private int overTotalPrice = 0;
     private FirebaseAuth auth;
+    private int orderNum;
 
 
     @Override
@@ -72,6 +72,26 @@ public class StoreActivityCart extends AppCompatActivity {
 
         NextProcessBtn = (Button) findViewById(R.id.next_process_btn);
         txtTotalAmount = (TextView) findViewById(R.id.total_price);
+
+        // 사용자 ordernum 가져오기
+        DatabaseReference numListRef = FirebaseDatabase.getInstance().getReference();
+        numListRef.child("Orders").child(auth.getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener(){
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        if (snapshot.hasChild("ordernum")){
+                            int value = snapshot.child("ordernum").getValue(int.class);
+                            orderNum = value;
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
 
     }
 
@@ -134,6 +154,11 @@ public class StoreActivityCart extends AppCompatActivity {
 
                             }
                         });
+
+                        FirebaseDatabase.getInstance().getReference().child("Cart List")
+                                .child("User View")
+                                .child(auth.getCurrentUser().getUid())
+                                .removeValue();
 
                         // 총 금액 계산 후 추가
                         DatabaseReference orderProductRef = FirebaseDatabase.getInstance().getReference()

@@ -44,7 +44,7 @@ public class StoreActivity extends Fragment {
     private StoreActivityMyAdapter storeActivityMyAdapter;
     private FirebaseFirestore db;
     private ProgressDialog progressDialog;
-    static int orderNum;
+    //static int orderNum;
     private Button searchBtn;
     private ImageButton categoryBtn;
     private EditText searchWord;
@@ -68,15 +68,6 @@ public class StoreActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.activity_store, container, false);
 
-        // 장바구니 버튼
-        /*FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-                                   @Override
-                                   public void onClick(View view) {
-                                       Intent intent = new Intent(getActivity(), StoreActivityCart.class);
-                                       startActivity(intent);
-                                   }
-                               });*/
 
         //로딩 다이얼로그
         progressDialog = new ProgressDialog(getActivity());
@@ -143,7 +134,7 @@ public class StoreActivity extends Fragment {
 
     //firestore에서 상품 데이터 불러오기 (어댑터 = StoreActivityMyAdapter)
     private void EventChangeListener() {
-        db.collection("StoreProducts").orderBy("category", Query.Direction.ASCENDING)
+        db.collection("StoreProducts")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

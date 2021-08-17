@@ -40,7 +40,6 @@ public class StoreActivityMyAdapter extends RecyclerView.Adapter<StoreActivityMy
     public void onBindViewHolder(@NonNull StoreActivityMyAdapter.MyViewHolder holder, int position) {
 
         StoreActivityProduct product = productArrayList.get(position);
-        holder.category.setText(product.category);
         holder.name.setText(product.name);
         holder.price.setText(product.price);
         Picasso.get().load(product.getImage()).into(holder.imageView);
@@ -75,7 +74,7 @@ public class StoreActivityMyAdapter extends RecyclerView.Adapter<StoreActivityMy
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            category = itemView.findViewById(R.id.product_category);
+            //category = itemView.findViewById(R.id.product_category);
             name = itemView.findViewById(R.id.product_name);
             price = itemView.findViewById(R.id.product_price);
             imageView = itemView.findViewById(R.id.product_image);

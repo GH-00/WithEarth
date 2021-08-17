@@ -15,8 +15,11 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
@@ -26,9 +29,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-import static com.example.withearth.StoreActivity.orderNum;
-
-
 public class StoreActivityOrderSuccess extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -36,7 +36,8 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
     private FirebaseAuth auth;
     private int overTotalPrice = 0;
     private TextView txtTotalAmount;
-    private TextView dateTime;
+    private TextView dateTime, orderTime;
+    private int orderNum, newNum;
 
 
     @Override
@@ -51,14 +52,34 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        txtTotalAmount = (TextView) findViewById(R.id.must_charge_tv);
-        dateTime = (TextView) findViewById(R.id.date_tv);
 
-        /*Calendar cal = Calendar.getInstance();
+        dateTime = (TextView) findViewById(R.id.date_tv);
+        orderTime = (TextView) findViewById(R.id.order_time_tv);
+
+        txtTotalAmount = (TextView) findViewById(R.id.must_charge_tv);
+
+        orderNum = getIntent().getIntExtra("ordernum", orderNum);
+
+        Calendar currentCal = Calendar.getInstance();
+        int currentYear = currentCal.get(Calendar.YEAR);
+        int currentMonth = currentCal.get(Calendar.MONTH) + 1;
+        int currentDay = currentCal.get(Calendar.DAY_OF_MONTH);
+        int currentHour = currentCal.get(Calendar.HOUR);
+        int currentMin = currentCal.get(Calendar.MINUTE);
+        orderTime.setText(currentYear + "년 "+currentMonth+"월 "+currentDay+"일 "+currentHour+"시 "+currentMin+"분");
+
+
+
+        Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, 7);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
-        String currentDate = dateFormat.format(cal);
-        dateTime.setText(currentDate);*/
+
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        dateTime.setText(year + "년 " + month + "월 " + day + "일 23시 59분까지");
+
+
 
         DatabaseReference orderListRef = FirebaseDatabase.getInstance().getReference().child("Orders");
         FirebaseRecyclerOptions<StoreActivityOrderProduct> options =
@@ -99,6 +120,12 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        newNum = orderNum + 1;
+        DatabaseReference nextnumRef = FirebaseDatabase.getInstance().getReference().child("Orders")
+                .child(auth.getCurrentUser().getUid());
+        HashMap<String, Object> nextnumMap = new HashMap<>();
+        nextnumMap.put("ordernum", newNum);
+        nextnumRef.updateChildren(nextnumMap);
 
 
     }
@@ -109,14 +136,6 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
 
         //주문 완료시 ordernum 1 증가, Orders 밑에 회원 ID로 저장
 
-        orderNum++;
-        //FirebaseDatabase database;
-        //database = FirebaseDatabase.getInstance();
-        //database.getReference().child("Orders").child(auth.getCurrentUser().getUid());
-        DatabaseReference nextnumRef = FirebaseDatabase.getInstance().getReference().child("Orders")
-                .child(auth.getCurrentUser().getUid());
-        HashMap<String, Object> nextnumMap = new HashMap<>();
-        nextnumMap.put("ordernum", orderNum);
-        nextnumRef.updateChildren(nextnumMap);
+
     }
 }

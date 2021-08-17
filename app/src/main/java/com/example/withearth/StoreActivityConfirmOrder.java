@@ -27,7 +27,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import static com.example.withearth.StoreActivity.orderNum;
 
 public class StoreActivityConfirmOrder extends AppCompatActivity {
 
@@ -35,9 +34,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
     private Button confirmOrderBtn;
     private FirebaseAuth auth;
     private String point;
-
-
-
+    private int orderNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,18 +49,38 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
         phoneEditText = (EditText) findViewById(R.id.shippment_phone_number);
         addressEditText = (EditText) findViewById(R.id.shippment_address);
 
+        // 사용자 ordernum 가져오기
+        DatabaseReference numListRef = FirebaseDatabase.getInstance().getReference();
+        numListRef.child("Orders").child(auth.getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener(){
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        if (snapshot.hasChild("ordernum")){
+                            int value = snapshot.child("ordernum").getValue(int.class);
+                            orderNum = value;
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
         confirmOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Check();
 
+                /*
                 DatabaseReference totalRef = FirebaseDatabase.getInstance().getReference("Orders");
                 totalRef = totalRef.child(auth.getCurrentUser().getUid()).child("ordernum");
                 totalRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        point = snapshot.getValue(String.class);
-                        int totalint = Integer.parseInt(point);
+                        String dpoint = snapshot.getValue(String.class);
+                        int totalint = Integer.parseInt(dpoint);
                         double finalpoint = Math.floor(totalint * 0.05);
                         point = String.valueOf(finalpoint);
                     }
@@ -78,6 +95,8 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
                 HashMap<String, Object> pointMap = new HashMap<>();
                 pointMap.put("point", point);
                 pointRef.updateChildren(pointMap);
+
+                 */
 
             }
         });
@@ -115,30 +134,13 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull @NotNull Task<Void> task) {
                 if (task.isSuccessful()){
-                    // 주문이 완료될 경우 장바구니 목록을 지움, order success로 이동
-                    FirebaseDatabase.getInstance().getReference().child("Cart List")
-                            .child("User View")
-                            .child(auth.getCurrentUser().getUid())
-                            .removeValue()
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        FirebaseDatabase.getInstance().getReference().child("Orders")
-                                                .child(auth.getCurrentUser().getUid())
-                                                .child("product")
-                                                .removeValue();
-                                        Intent intent = new Intent(StoreActivityConfirmOrder.this, StoreActivityOrderSuccess.class);
-                                        //intent.putExtra("current time", currentTime);
-                                        startActivity(intent);
-                                        finish();
+
+                    Intent intent = new Intent(StoreActivityConfirmOrder.this, StoreActivityOrderSuccess.class);
+                    intent.putExtra("ordernum", orderNum);
+                    startActivity(intent);
+                    finish();
 
 
-                                    }
-
-
-                                }
-                            });
                 }
             }
         });

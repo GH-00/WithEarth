@@ -27,8 +27,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
-import static com.example.withearth.StoreActivity.orderNum;
-
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;       //파이어베이스 인증
     private DatabaseReference mDatabaseRef;   //실시간 데이터베이스
@@ -78,15 +76,14 @@ public class LoginActivity extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                                             if (snapshot.hasChild("ordernum")){
-                                                int value = snapshot.child("ordernum").getValue(int.class);
-                                                orderNum = value;
 
                                             }
+
                                             else{
                                                 HashMap<String, Object> numMap = new HashMap<>();
                                                 numMap.put("ordernum", 1);
                                                 numListRef.child("Orders").child(mFirebaseAuth.getCurrentUser().getUid()).updateChildren(numMap);
-                                                orderNum = 1;
+
 
                                             }
 
@@ -97,7 +94,6 @@ public class LoginActivity extends AppCompatActivity {
 
                                         }
                                     });
-
                             finish(); //현재 액티비티(=LoginActivity) 파괴
                         }
                         else {

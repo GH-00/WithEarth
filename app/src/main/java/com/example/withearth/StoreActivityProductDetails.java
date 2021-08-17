@@ -40,7 +40,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.withearth.StoreActivity.orderNum;
 
 public class StoreActivityProductDetails extends AppCompatActivity {
     private ImageView productImage;
@@ -59,6 +58,7 @@ public class StoreActivityProductDetails extends AppCompatActivity {
     private String pTime;
 
     private FirebaseAuth auth;
+    private int orderNum;
 
 
     private Intent intent;
@@ -98,6 +98,24 @@ public class StoreActivityProductDetails extends AppCompatActivity {
         productPrice.setText(pPrice);
         productDescription.setText(pDescription);
         Picasso.get().load(pImage).into(productImage);
+
+        DatabaseReference numListRef = FirebaseDatabase.getInstance().getReference();
+        numListRef.child("Orders").child(auth.getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener(){
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        if (snapshot.hasChild("ordernum")){
+                            int value = snapshot.child("ordernum").getValue(int.class);
+                            orderNum = value;
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
 
         //장바구니를 거치지 않고 바로 주문하기
 

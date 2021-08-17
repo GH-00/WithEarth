@@ -33,20 +33,10 @@
             />
 
         <TextView
-            android:id="@+id/product_category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/product_price"
-            android:text="Product category"
-            android:textSize="18dp"
-            android:textColor="#808080"
-            />
-
-        <TextView
             android:id="@+id/product_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/product_category"
+            android:layout_below="@+id/product_price"
             android:text="Product name"
             android:layout_marginTop="2dp"
             android:textSize="16dp"
