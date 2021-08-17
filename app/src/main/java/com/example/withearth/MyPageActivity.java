@@ -1,5 +1,6 @@
 package com.example.withearth;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import org.jetbrains.annotations.NotNull;
@@ -103,13 +105,38 @@ public class MyPageActivity extends Fragment {
             btn_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //탈퇴 하기
-                    mFirebaseAuth.getCurrentUser().delete();
-                    Toast.makeText(v.getContext(), "탈퇴 처리가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                    //정말 탈퇴할 것인지 묻는 팝업창
+                    AlertDialog.Builder ad = new AlertDialog.Builder(v.getContext());
+                    ad.setIcon(R.drawable.ic_environment);
+                    ad.setTitle("회원 탈퇴");
+                    ad.setMessage("        회원 탈퇴 시 계정과 관련된 정보는\n         복구가 불가하며 현재 보유 중인 \n            포인트는 모두 소멸됩니다.\n\n    계정을 영구적으로 삭제하시겠습니까?");
 
-                    //탈퇴 이후 LoginActivity로 이동
-                    Intent intent = new Intent(v.getContext(), LoginActivity.class);
-                    startActivity(intent);
+                    //긍정 버튼
+                    ad.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //탈퇴 하기
+                            mFirebaseAuth.getCurrentUser().delete();
+                            Toast.makeText(v.getContext(), "탈퇴 처리가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+
+                            //다이얼로그 팝업창 닫기
+                            dialog.dismiss();
+
+                            //탈퇴 이후 LoginActivity로 이동
+                            Intent intent = new Intent(v.getContext(), LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    //부정 버튼
+                    ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //다이얼로그 팝업창 닫기
+                            dialog.dismiss();
+                        }
+                    });
+                    ad.show();
+
                 }
             });
 
