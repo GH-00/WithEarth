@@ -34,7 +34,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
     private EditText nameEditText, phoneEditText, addressEditText;
     private Button confirmOrderBtn;
     private FirebaseAuth auth;
-    private int point;
+    private String point;
 
 
 
@@ -57,38 +57,27 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
             public void onClick(View v) {
                 Check();
 
-                DatabaseReference totalRef = FirebaseDatabase.getInstance().getReference();
-                totalRef.child("Orders").child(auth.getCurrentUser().getUid()).child("ordernum");
+                DatabaseReference totalRef = FirebaseDatabase.getInstance().getReference("Orders");
+                totalRef = totalRef.child(auth.getCurrentUser().getUid()).child("ordernum");
                 totalRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        point = snapshot.getValue(int.class);
+                        point = snapshot.getValue(String.class);
+                        int totalint = Integer.parseInt(point);
+                        double finalpoint = Math.floor(totalint * 0.05);
+                        point = String.valueOf(finalpoint);
                     }
+
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        return;
-                    }
+                    public void onCancelled(@NonNull DatabaseError error) { }
                 });
 
-                totalRef.child("Point").child(auth.getCurrentUser().getUid())
-                        .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                       // int totalint = Integer.parseInt(point);
-                        double finalpoint = Math.floor(point * 0.05);
-                        point = (int) finalpoint;
-                    }
+                DatabaseReference pointRef = FirebaseDatabase.getInstance().getReference("Point")
+                        .child(auth.getCurrentUser().getUid());
 
-                    @Override
-                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
-                        return;
-                    }
-                });
-
-                DatabaseReference pointRef = FirebaseDatabase.getInstance().getReference().child("Point");
                 HashMap<String, Object> pointMap = new HashMap<>();
                 pointMap.put("point", point);
-                pointRef.child(auth.getCurrentUser().getUid()).updateChildren(pointMap);
+                pointRef.updateChildren(pointMap);
 
             }
         });
