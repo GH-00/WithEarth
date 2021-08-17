@@ -68,7 +68,7 @@ public class MyPageActivity extends Fragment {
             TextView emailIdData = (TextView) view.findViewById(R.id.emailIdData);
 
             UserAccount account = new UserAccount();
-            emailIdData.setText(account.getEmailId());
+            emailIdData.setText("바보");
 
             //=======================================
 

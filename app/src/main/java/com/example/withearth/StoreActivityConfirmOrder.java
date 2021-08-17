@@ -58,20 +58,30 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
                 Check();
 
                 DatabaseReference totalRef = FirebaseDatabase.getInstance().getReference();
+                totalRef.child("Orders").child(auth.getCurrentUser().getUid()).child("ordernum");
+                totalRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        point = snapshot.getValue(String.class);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        return;
+                    }
+                });
+
                 totalRef.child("Point").child(auth.getCurrentUser().getUid())
                         .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
-                        String totaldb = snapshot.getValue(String.class);
-                        int totalint = Integer.parseInt(totaldb);
+                        int totalint = Integer.parseInt(point);
                         double finalpoint = Math.floor(totalint * 0.05);
                         point = String.valueOf(finalpoint);
                     }
 
                     @Override
                     public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
+                        return;
                     }
                 });
 
