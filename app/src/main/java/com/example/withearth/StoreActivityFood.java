@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -72,6 +73,18 @@ public class StoreActivityFood extends AppCompatActivity {
                 finish();
             }
         });
+
+
+        //최상단 이동 버튼
+        FloatingActionButton btn_up = (FloatingActionButton) findViewById(R.id.btn_up);
+        btn_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.smoothScrollToPosition(0);
+            }
+        });
+
+
     }
 
     //검색 기능, 단어 포함된 항목 검색

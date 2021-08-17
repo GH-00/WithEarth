@@ -11,13 +11,21 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/categoryBtn"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/menu" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:backgroundTint="@color/black"
+            android:src="@drawable/menu"
+            app:tint="@color/white" />
 
 
         <EditText
@@ -25,6 +33,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:hint="검색어를 입력해주세요."
             android:inputType="text" />
 
@@ -32,6 +43,11 @@
             android:id="@+id/searchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/black"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
             android:text="검색" />
 
     </LinearLayout>
@@ -50,6 +66,20 @@
             android:layout_marginRight="10dp"
             android:scrollbars="vertical"
             />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_up"
+            android:layout_gravity="right|bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="12dp"
+            android:backgroundTint="#FFFFFF"
+            app:borderWidth="0dp"
+            android:tint="@color/black"
+            app:fabCustomSize="45dp"
+            app:rippleColor="@color/black"
+            android:src="@drawable/ic_arrow_upward" />
 
     </FrameLayout>
 

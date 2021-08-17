@@ -50,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/product_image_details"
+            android:background="@drawable/edge_bottom_line"
             android:orientation="vertical">
 
             <TextView
@@ -57,10 +58,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="left"
                 android:text="product name"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -68,11 +71,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/product_name_details"
-                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="product description"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -80,27 +82,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/product_description_details"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="left|top"
                 android:text="product price details"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="30dp"
                 android:textStyle="bold" />
 
-            <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-                android:id="@+id/number_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/product_price_details"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:elevation="6dp"
-                app:finalNumber="10"
-                app:initialNumber="1"
-                app:textSize="10dp" />
         </LinearLayout>
+
+
+        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+            android:id="@+id/number_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/product_price_details"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:backGroundColor="@color/black"
+            android:elevation="6dp"
+            app:finalNumber="10"
+            app:initialNumber="1"
+            app:textSize="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

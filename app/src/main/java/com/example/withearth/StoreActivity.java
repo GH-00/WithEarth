@@ -108,6 +108,17 @@ public class StoreActivity extends Fragment {
                 startActivity(intent);
             }
         });
+
+
+        //최상단 이동 버튼
+        FloatingActionButton btn_up = (FloatingActionButton) rootView.findViewById(R.id.btn_up);
+        btn_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.smoothScrollToPosition(0);
+            }
+        });
+
         return rootView;
     }
 
