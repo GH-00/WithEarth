@@ -8,7 +8,6 @@
         <shape android:shape="rectangle">
             <stroke android:width="0.5dp"
                 android:color="#DDDDDD"/>
-            <solid android:color="@color/white"/>
         </shape>
     </item>
 </layer-list>

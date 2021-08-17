@@ -23,9 +23,9 @@
             android:layout_gravity="center"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@color/white"
             android:src="@drawable/menu"
-            app:tint="@color/white" />
+            app:tint="@color/black" />
 
 
         <EditText

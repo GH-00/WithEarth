@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="textStart"
         android:paddingLeft="20dp"
-        android:background="@drawable/edge_all"
+        android:background="@drawable/edge_bottom_line"
         android:text="의류"
         android:textSize="16dp"
         android:textStyle="bold"/>
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:gravity="left|center_vertical"
         android:paddingLeft="20dp"
-        android:background="@drawable/edge_all"
+        android:background="@drawable/edge_bottom_line"
         android:text="식품"
         android:textSize="16dp"
         android:textStyle="bold"/>
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:gravity="left|center_vertical"
         android:paddingLeft="20dp"
-        android:background="@drawable/edge_all"
+        android:background="@drawable/edge_bottom_line"
         android:text="청소용품"
         android:textSize="16dp"
         android:textStyle="bold"/>
@@ -70,7 +70,7 @@
         android:id="@+id/cate_sundries"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edge_all"
+        android:background="@drawable/edge_bottom_line"
         android:paddingLeft="20dp"
         android:gravity="left|center_vertical"
         android:text="잡화"
@@ -80,7 +80,7 @@
     <Button
         android:id="@+id/cate_cos"
         android:layout_width="match_parent"
-        android:background="@drawable/edge_all"
+        android:background="@drawable/edge_bottom_line"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
         android:gravity="left|center_vertical"
