@@ -9,17 +9,15 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -32,11 +30,9 @@ import static com.example.withearth.StoreActivity.orderNum;
 public class StoreActivityConfirmOrder extends AppCompatActivity {
 
     private EditText nameEditText, phoneEditText, addressEditText;
+    private TextView totalPricetv;
     private Button confirmOrderBtn;
     private FirebaseAuth auth;
-    private String point;
-
-
 
 
     @Override
@@ -44,6 +40,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         auth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_store_confirm_order);
+        String total = getIntent().getStringExtra("total");
 
         //currentTime = getIntent().getStringExtra("current time");
 
@@ -51,45 +48,13 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
         nameEditText = (EditText) findViewById(R.id.shippment_name);
         phoneEditText = (EditText) findViewById(R.id.shippment_phone_number);
         addressEditText = (EditText) findViewById(R.id.shippment_address);
+        totalPricetv = (TextView) findViewById(R.id.total_price_tv);
+        totalPricetv.setText(total);
 
         confirmOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Check();
-
-                DatabaseReference totalRef = FirebaseDatabase.getInstance().getReference();
-                totalRef.child("Orders").child(auth.getCurrentUser().getUid()).child("ordernum");
-                totalRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        point = snapshot.getValue(String.class);
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        return;
-                    }
-                });
-
-                totalRef.child("Point").child(auth.getCurrentUser().getUid())
-                        .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                        int totalint = Integer.parseInt(point);
-                        double finalpoint = Math.floor(totalint * 0.05);
-                        point = String.valueOf(finalpoint);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
-                        return;
-                    }
-                });
-
-                DatabaseReference pointRef = FirebaseDatabase.getInstance().getReference().child("Point");
-                HashMap<String, Object> pointMap = new HashMap<>();
-                pointMap.put("point", 3000);
-                pointRef.child(auth.getCurrentUser().getUid()).updateChildren(pointMap);
-
             }
         });
 

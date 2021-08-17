@@ -133,6 +133,7 @@ public class StoreActivityCart extends AppCompatActivity {
                         orderProductRef.updateChildren(totalPriceMap);
 
                         Intent intent = new Intent(StoreActivityCart.this, StoreActivityConfirmOrder.class);
+                        intent.putExtra("total", String.valueOf(overTotalPrice));
                         startActivity(intent);
                         finish();
                     }
