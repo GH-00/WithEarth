@@ -66,10 +66,21 @@ public class MyPageActivity extends Fragment {
 
             //로그인 한 이메일 출력
             final FirebaseUser user = mFirebaseAuth.getCurrentUser();
-
             TextView emailIdData = view.findViewById(R.id.emailIdData);
             emailIdData.setText(user.getEmail());
 
+            TextView nameData = view.findViewById(R.id.nameData);
+            databaseReference = database.getReference("Users").child(mFirebaseAuth.getCurrentUser().getUid());
+            databaseReference.child("name").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String name = snapshot.getValue(String.class);
+                    nameData.setText(name);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) { }
+            });
 
             //로그아웃 버튼
             Button btn_logout = (Button) view.findViewById(R.id.btn_logout);

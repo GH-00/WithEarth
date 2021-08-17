@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/96wlg/StudioProjects/WithEarth/app/src/main/res/drawable/edge_bottom.xml" value="0.23697916666666666" />
+        <entry key="..\:/Users/96wlg/StudioProjects/WithEarth/app/src/main/res/drawable/edge_bottom_line.xml" value="0.23697916666666666" />
+        <entry key="..\:/Users/96wlg/StudioProjects/WithEarth/app/src/main/res/layout/activity_login.xml" value="0.11684782608695653" />
         <entry key="..\:/Users/96wlg/StudioProjects/WithEarth/app/src/main/res/layout/activity_mypage.xml" value="0.25" />
+        <entry key="..\:/Users/96wlg/StudioProjects/WithEarth/app/src/main/res/layout/activity_splash.xml" value="0.165" />
+        <entry key="..\:/Users/96wlg/StudioProjects/WithEarth/app/src/main/res/layout/activity_store_product_details.xml" value="0.165" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_jjim.xml" value="0.12182971014492754" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_jjim_unlogin.xml" value="0.2" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_login.xml" value="0.12047101449275362" />
