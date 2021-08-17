@@ -243,7 +243,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/purchase_btn"
+            android:id="@+id/keep_shop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -258,7 +258,7 @@
 
 
         <Button
-            android:id="@+id/add_to_cart_btn"
+            android:id="@+id/look_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

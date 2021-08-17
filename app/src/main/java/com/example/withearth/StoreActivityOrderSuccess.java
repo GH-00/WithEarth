@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
     private TextView txtTotalAmount;
     private TextView dateTime, orderTime;
     private int orderNum, newNum;
+    private Button keepShopBtn;
 
 
     @Override
@@ -55,10 +57,18 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
 
         dateTime = (TextView) findViewById(R.id.date_tv);
         orderTime = (TextView) findViewById(R.id.order_time_tv);
-
+        keepShopBtn = (Button) findViewById(R.id.keep_shop);
+        keepShopBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StoreActivityOrderSuccess.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         txtTotalAmount = (TextView) findViewById(R.id.must_charge_tv);
 
         orderNum = getIntent().getIntExtra("ordernum", orderNum);
+
 
         Calendar currentCal = Calendar.getInstance();
         int currentYear = currentCal.get(Calendar.YEAR);
@@ -78,7 +88,6 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
         dateTime.setText(year + "년 " + month + "월 " + day + "일 23시 59분까지");
-
 
 
         DatabaseReference orderListRef = FirebaseDatabase.getInstance().getReference().child("Orders");
@@ -120,6 +129,7 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        //주문 완료시 ordernum 1 증가, Orders 밑에 회원 ID로 저장
         newNum = orderNum + 1;
         DatabaseReference nextnumRef = FirebaseDatabase.getInstance().getReference().child("Orders")
                 .child(auth.getCurrentUser().getUid());
@@ -134,7 +144,7 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        //주문 완료시 ordernum 1 증가, Orders 밑에 회원 ID로 저장
+
 
 
     }

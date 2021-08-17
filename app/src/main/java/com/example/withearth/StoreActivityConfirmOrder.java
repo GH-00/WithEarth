@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -35,6 +36,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
     private FirebaseAuth auth;
     private String point;
     private int orderNum;
+    private TextView totalPricetv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +44,17 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_store_confirm_order);
 
-        //currentTime = getIntent().getStringExtra("current time");
+        String totalPrice = getIntent().getStringExtra("total");
+
+
 
         confirmOrderBtn = (Button) findViewById(R.id.confirm_final_order_btn);
         nameEditText = (EditText) findViewById(R.id.shippment_name);
         phoneEditText = (EditText) findViewById(R.id.shippment_phone_number);
         addressEditText = (EditText) findViewById(R.id.shippment_address);
+
+        totalPricetv = (TextView) findViewById(R.id.total_price_tv);
+        totalPricetv.setText(totalPrice);
 
         // 사용자 ordernum 가져오기
         DatabaseReference numListRef = FirebaseDatabase.getInstance().getReference();
