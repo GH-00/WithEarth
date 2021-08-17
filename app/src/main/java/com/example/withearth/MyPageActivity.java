@@ -71,6 +71,7 @@ public class MyPageActivity extends Fragment {
             TextView emailIdData = view.findViewById(R.id.emailIdData);
             emailIdData.setText(user.getEmail());
 
+            //이름 출력
             TextView nameData = view.findViewById(R.id.nameData);
             databaseReference = database.getReference("Users").child(mFirebaseAuth.getCurrentUser().getUid());
             databaseReference.child("name").addValueEventListener(new ValueEventListener() {
@@ -83,6 +84,23 @@ public class MyPageActivity extends Fragment {
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) { }
             });
+
+            //포인트 출력
+            TextView tv_point = view.findViewById(R.id.tv_point);
+            databaseReference = database.getReference("Point").child(mFirebaseAuth.getCurrentUser().getUid());
+            /*databaseReference.child("point").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String point = snapshot.getValue(String.class);
+                    tv_point.setText(point);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });*/
+
 
             //로그아웃 버튼
             Button btn_logout = (Button) view.findViewById(R.id.btn_logout);
