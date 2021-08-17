@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -60,17 +62,14 @@ public class MyPageActivity extends Fragment {
         //로그인 했을 시
         if(mFirebaseAuth.getCurrentUser() != null){
 
-            mFirebaseAuth = FirebaseAuth.getInstance();  //초기화
-
-            //=======================================
+            mFirebaseAuth = FirebaseAuth.getInstance();  //FirebaseAuth 객체 초기화
 
             //로그인 한 이메일 출력
-            TextView emailIdData = (TextView) view.findViewById(R.id.emailIdData);
+            final FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
-            UserAccount account = new UserAccount();
-            emailIdData.setText(account.getEmailId());
+            TextView emailIdData = view.findViewById(R.id.emailIdData);
+            emailIdData.setText(user.getEmail());
 
-            //=======================================
 
             //로그아웃 버튼
             Button btn_logout = (Button) view.findViewById(R.id.btn_logout);

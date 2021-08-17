@@ -73,10 +73,11 @@ public class RegisterActivity extends AppCompatActivity {
                             //setValue : database에 insert(삽입)하는 행위
                             mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
 
-                            Toast.makeText(RegisterActivity.this, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                         }
+                        //계정이 중복된 경우
                         else {
-                            Toast.makeText(RegisterActivity.this, "회원가입에 실패하였습니다", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "이미 존재하는 이메일ID 입니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
