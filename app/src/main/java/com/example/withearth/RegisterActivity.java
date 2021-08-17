@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,11 +23,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;       //파이어베이스 인증
     private DatabaseReference mDatabaseRef;   //실시간 데이터베이스
-    private EditText mEtEmail, mEtPwd;        //회원가입 입력필드
+    private EditText mEtEmail, mEtPwd, mEtPwdCheck, mEtName;        //회원가입 입력필드
     private Button mBtnRegister;              //회원가입 버튼
 
     @Override
@@ -45,8 +48,11 @@ public class RegisterActivity extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("withEarth");
 
-        mEtEmail = findViewById(R.id.et_email);  //연동
-        mEtPwd = findViewById(R.id.et_pwd);      //연동
+        //연동
+        mEtEmail = findViewById(R.id.et_email);
+        mEtPwd = findViewById(R.id.et_pwd);
+        mEtPwdCheck = findViewById(R.id.et_pwd_check);
+        mEtName = findViewById(R.id.et_name);
         mBtnRegister = findViewById(R.id.btn_register);
 
 
@@ -55,32 +61,72 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //회원가입 처리 시작
-                String strEmail = mEtEmail.getText().toString();    //사용자가 입력한 값을 가져옴
-                String strPwd = mEtPwd.getText().toString();        // "
+                //사용자가 입력한 값을 가져옴
+                String strEmail = mEtEmail.getText().toString().trim();
+                String strPwd = mEtPwd.getText().toString().trim();
+                String strPwdCheck = mEtPwdCheck.getText().toString().trim();
 
-                //Firebase Auth 진행
-                mFirebaseAuth.createUserWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
-                        //가입이 성공적으로 이루어졌을 때의 처리
-                        if (task.isSuccessful()) {
-                            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-                            UserAccount account = new UserAccount();
-                            account.setIdToken(firebaseUser.getUid());
-                            account.setEmailId(firebaseUser.getEmail());
-                            account.setPassword(strPwd);
+                //pwd와 pwdCheck가 일치할 때
+                if (strPwd.equals(strPwdCheck)) {
+                    //Firebase Auth 진행
+                    //Firebase에 신규 계정 등록하기
+                    mFirebaseAuth.createUserWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+                            //가입이 성공적으로 이루어졌을 때의 처리
+                            if (task.isSuccessful()) {
+                                FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+                                UserAccount account = new UserAccount();
+                                account.setIdToken(firebaseUser.getUid());
+                                account.setEmailId(firebaseUser.getEmail());
+                                account.setPassword(strPwd);
 
-                            //setValue : database에 insert(삽입)하는 행위
-                            mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
+                                String email = firebaseUser.getEmail();
+                                String uid = firebaseUser.getUid();
+                                String name = mEtName.getText().toString().trim();
+                                String password = mEtPwd.getText().toString().trim();
 
-                            Toast.makeText(RegisterActivity.this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                                //해쉬맵 테이블을 파이어베이스 데이터베이스에 저장
+                                HashMap<Object, String> hashMap = new HashMap<>();
+
+                                hashMap.put("email",email);
+                                hashMap.put("uid",uid);
+                                hashMap.put("name",name);
+                                hashMap.put("password", password);
+
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference reference = database.getReference("Users");
+                                reference.child(uid).setValue(hashMap);
+
+                                //가입이 완료 시 가입 화면을 빠져나감
+                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
+
+
+                                //setValue : database에 insert(삽입)하는 행위
+                                //mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
+
+                                Toast.makeText(RegisterActivity.this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                            //계정이 중복된 경우
+                            else {
+                                Toast.makeText(RegisterActivity.this, "이미 존재하는 이메일ID 입니다.", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        //계정이 중복된 경우
-                        else {
-                            Toast.makeText(RegisterActivity.this, "이미 존재하는 이메일ID 입니다.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                    });
+
+
+
+                }
+                //pwd와 pwdCheck가 일치하지 않을 때
+                else {
+                    Toast.makeText(RegisterActivity.this, "비밀번호가 일치하지 않습니다. 다시 입력해 주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+
+                }
+
+
 
             }
         });
