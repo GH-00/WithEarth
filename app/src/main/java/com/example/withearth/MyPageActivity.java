@@ -90,7 +90,7 @@ public class MyPageActivity extends Fragment {
 
             //탈퇴 버튼
             Button btn_delete = (Button) view.findViewById(R.id.btn_delete);
-            btn_logout.setOnClickListener(new View.OnClickListener() {
+            btn_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //탈퇴 하기
