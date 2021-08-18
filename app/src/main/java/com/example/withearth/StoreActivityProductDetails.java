@@ -153,6 +153,7 @@ public class StoreActivityProductDetails extends AppCompatActivity {
                 //confirm order로 이동
                 Intent intent = new Intent(StoreActivityProductDetails.this, StoreActivityConfirmOrder.class);
                 intent.putExtra("total", sPrice);
+                intent.putExtra("ordernum", String.valueOf(orderNum));
                 startActivity(intent);
                 finish();
             }

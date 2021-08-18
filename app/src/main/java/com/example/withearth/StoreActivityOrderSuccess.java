@@ -112,7 +112,7 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
                 int oneTyprProductPrice = ((Integer.valueOf(model.getPrice()))) * Integer.valueOf(model.getQuantity());
                 overTotalPrice = overTotalPrice + oneTyprProductPrice;
                 txtTotalAmount.setText(String.valueOf(overTotalPrice));
-                order_product_price.setText(String.valueOf(overTotalPrice));
+                //order_product_price.setText(String.valueOf(overTotalPrice));
 
             }
 

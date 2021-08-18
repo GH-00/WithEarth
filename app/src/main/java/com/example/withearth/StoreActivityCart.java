@@ -170,6 +170,7 @@ public class StoreActivityCart extends AppCompatActivity {
 
                         Intent intent = new Intent(StoreActivityCart.this, StoreActivityConfirmOrder.class);
                         intent.putExtra("total", String.valueOf(overTotalPrice));
+                        intent.putExtra("ordernum", String.valueOf(orderNum));
                         startActivity(intent);
                         finish();
                     }
