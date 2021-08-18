@@ -37,13 +37,23 @@ public class RegisterAgreementActivity extends AppCompatActivity {
         CheckBox checkbox_two = (CheckBox)findViewById(R.id.checkbox_two);
         CheckBox checkbox_three = (CheckBox)findViewById(R.id.checkbox_three);
 
-        //전체동의 체크박스가 눌렸을 때
-        if (checkbox_all.isPressed()) {
-            checkbox_one.setChecked(true);
-            checkbox_two.setChecked(true);
-            checkbox_three.setChecked(true);
-        }
 
+        //전체동의 체크박스가 눌렸을 때
+        checkbox_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkbox_all.isChecked()) {
+                    checkbox_one.setChecked(true);
+                    checkbox_two.setChecked(true);
+                    checkbox_three.setChecked(true);
+                }
+                else {
+                    checkbox_one.setChecked(false);
+                    checkbox_two.setChecked(false);
+                    checkbox_three.setChecked(false);
+                }
+            }
+        });
 
 
 
