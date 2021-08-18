@@ -35,11 +35,10 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private FirebaseAuth auth;
-    private int overTotalPrice = 0;
-    private TextView txtTotalAmount;
-    private TextView order_product_price;
+    private TextView order_total_price, must_charge_tv;
     private TextView dateTime, orderTime;
     private int orderNum, newNum;
+    private String total;
     private Button keepShopBtn;
 
 
@@ -66,12 +65,27 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        txtTotalAmount = (TextView) findViewById(R.id.must_charge_tv);
+
+        must_charge_tv = (TextView) findViewById(R.id.must_charge_tv);
+        order_total_price = (TextView) findViewById(R.id.order_total_price);
 
         orderNum = getIntent().getIntExtra("ordernum", orderNum);
 
-        order_product_price = (TextView) findViewById(R.id.order_product_price);
+        DatabaseReference getPriceRef = FirebaseDatabase.getInstance().getReference().child("Orders")
+                .child(auth.getCurrentUser().getUid()).child(String.valueOf(orderNum));
+        getPriceRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                total = snapshot.child("total").getValue(String.class);
+                must_charge_tv.setText(total);
+                order_total_price.setText(total);
+            }
 
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
 
 
         Calendar currentCal = Calendar.getInstance();
@@ -108,11 +122,6 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
                 holder.txtProductPrice.setText(model.getPrice());
                 holder.txtProductQuantity.setText(model.getQuantity());
                 Picasso.get().load(model.getImage()).into(holder.txtProductImage);
-
-                int oneTyprProductPrice = ((Integer.valueOf(model.getPrice()))) * Integer.valueOf(model.getQuantity());
-                overTotalPrice = overTotalPrice + oneTyprProductPrice;
-                txtTotalAmount.setText(String.valueOf(overTotalPrice));
-                //order_product_price.setText(String.valueOf(overTotalPrice));
 
             }
 

@@ -104,6 +104,15 @@ public class RegisterActivity extends AppCompatActivity {
                                 DatabaseReference reference = database.getReference("Users");
                                 reference.child(uid).setValue(hashMap);
 
+
+                                //회원가입시 포인트 3000p 증정
+                                DatabaseReference pointListRef = FirebaseDatabase.getInstance().getReference();
+                                pointListRef.child("Point").child(mFirebaseAuth.getCurrentUser().getUid());
+                                HashMap<String, Object> pointListMap = new HashMap<>();
+                                pointListMap.put("point", "3000");
+                                pointListRef.child("Point").child(mFirebaseAuth.getCurrentUser().getUid()).updateChildren(pointListMap);
+
+
                                 // 회원가입 시 사용자 ordernum 생성(=1)
                                 DatabaseReference numListRef = FirebaseDatabase.getInstance().getReference();
                                 numListRef.child("Orders").child(mFirebaseAuth.getCurrentUser().getUid())

@@ -31,35 +31,130 @@ import java.util.HashMap;
 
 public class StoreActivityConfirmOrder extends AppCompatActivity {
 
-    private EditText nameEditText, phoneEditText, addressEditText;
-    private Button confirmOrderBtn;
+    private EditText nameEditText, phoneEditText, addressEditText, usePointEditText;
+    private Button confirmOrderBtn, usePointBtn;
     private FirebaseAuth auth;
     private String point;
     private int orderNum;
-    private TextView totalPricetv;
+    private TextView totalPricetv, remainPointtv;
     String stOrderNum;
+    String currentPoint;
+    String usePoint;
+    String finalRemainPoint;
+    String totalPrice;
 
+    int intCurrentPoint;
     double realPoint;
+    int intUsePoint, intFinalRemainPoint;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         auth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_store_confirm_order);
 
-        String totalPrice = getIntent().getStringExtra("total");
+        totalPrice = getIntent().getStringExtra("total");
         stOrderNum = getIntent().getStringExtra("ordernum");
         orderNum = Integer.parseInt(stOrderNum);
 
-
-
-
+        usePointBtn = (Button) findViewById(R.id.use_point_btn);
         confirmOrderBtn = (Button) findViewById(R.id.confirm_final_order_btn);
         nameEditText = (EditText) findViewById(R.id.shippment_name);
         phoneEditText = (EditText) findViewById(R.id.shippment_phone_number);
         addressEditText = (EditText) findViewById(R.id.shippment_address);
 
+        usePointEditText = (EditText) findViewById(R.id.use_point_et);
+
         totalPricetv = (TextView) findViewById(R.id.total_price_tv);
+        remainPointtv = (TextView) findViewById(R.id.remain_point_tv);
         totalPricetv.setText(totalPrice);
+
+
+        DatabaseReference pointLoadRef = FirebaseDatabase.getInstance().getReference().child("Point")
+                .child(auth.getCurrentUser().getUid());
+        pointLoadRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                currentPoint = snapshot.child("point").getValue(String.class);
+                remainPointtv.setText(currentPoint);
+                intCurrentPoint = Integer.parseInt(currentPoint);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+        usePointBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                usePoint = usePointEditText.getText().toString();
+                intUsePoint = Integer.parseInt(usePoint);
+                intFinalRemainPoint = intCurrentPoint - intUsePoint ;
+                finalRemainPoint = String.valueOf(intFinalRemainPoint);
+
+                if (usePoint != null){
+
+                    if (intUsePoint > intCurrentPoint){
+                        Toast.makeText(StoreActivityConfirmOrder.this, "입력한 포인트가 잔액을 초과하였습니다.", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    else {
+
+                        int intTotalPrice = Integer.parseInt(totalPrice);
+                        int finalPrice = intTotalPrice - intUsePoint;
+
+                        totalPricetv.setText(String.valueOf((int) finalPrice));
+
+                        DatabaseReference newtotalRef = FirebaseDatabase.getInstance().getReference().child("Orders");
+                        newtotalRef = newtotalRef.child(auth.getCurrentUser().getUid()).child(String.valueOf(orderNum));
+                        HashMap<String, Object> newtotalMap = new HashMap<>();
+                        newtotalMap.put("total", String.valueOf((int) finalPrice));
+                        newtotalRef.updateChildren(newtotalMap);
+
+                        DatabaseReference newPointRef = FirebaseDatabase.getInstance().getReference().child("Point")
+                                .child(auth.getCurrentUser().getUid());
+                        newPointRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                if (snapshot.hasChild("point")){
+
+                                    HashMap<String, Object> newPointMap = new HashMap<>();
+                                    newPointMap.put("point", finalRemainPoint);
+                                    newPointRef.updateChildren(newPointMap);
+
+                                }
+
+                                else {
+
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                            }
+                        });
+
+                    }
+
+
+                }
+
+                else {
+                    Toast.makeText(StoreActivityConfirmOrder.this, "사용할 포인트를 입력하세요", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+
 
         // 사용자 ordernum 가져오기
 
@@ -96,7 +191,6 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
                                     HashMap<String, Object> pointMap = new HashMap<>();
                                     pointMap.put("point", point);
                                     pointRef.updateChildren(pointMap);
-
 
                                 }
 
