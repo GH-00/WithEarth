@@ -118,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                 //첫 번째 인자 : 현재 액티비티, 두 번째 인자 : 이동할 액티비티
                 Intent intent = new Intent(LoginActivity.this, RegisterAgreementActivity.class);
                 startActivity(intent);
+                finish();
 
             }
         });

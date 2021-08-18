@@ -88,6 +88,7 @@ public class RegisterAgreementActivity extends AppCompatActivity {
                 //로그인 화면으로 이동
                 Intent intent = new Intent(RegisterAgreementActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
