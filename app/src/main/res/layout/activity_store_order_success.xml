@@ -146,10 +146,133 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/pay_LL"
+                android:id="@+id/info_LL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/order_LL"
+                android:background="@drawable/edge_top"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                >
+
+                <TextView
+                    android:id="@+id/user_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="주문자 정보"
+                    android:background="@drawable/edge_bottom_gray"
+                    android:paddingBottom="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:id="@+id/infoName_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/name_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="주문자 성함"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#606060"
+                        android:textStyle="bold"
+                        android:textSize="13dp"/>
+
+                    <TextView
+                        android:id="@+id/name_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="이름"
+                        android:gravity="right"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#606060"
+                        android:textStyle="bold"
+                        android:textSize="13dp"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/address_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="배송 주소"
+                        android:layout_below="@+id/pay_account_info"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#606060"
+                        android:textStyle="bold"
+                        android:textSize="13dp"/>
+
+                    <TextView
+                        android:id="@+id/address_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="주소"
+                        android:gravity="right"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#606060"
+                        android:textStyle="bold"
+                        android:textSize="13dp"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/phonenum_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="연락처"
+                        android:layout_below="@+id/pay_account_info"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#606060"
+                        android:textStyle="bold"
+                        android:textSize="13dp"/>
+
+                    <TextView
+                        android:id="@+id/phonenum_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="번호"
+                        android:gravity="right"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#606060"
+                        android:textStyle="bold"
+                        android:textSize="13dp"/>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/pay_LL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/info_LL"
                 android:background="@drawable/edge_top"
                 android:orientation="vertical"
                 android:layout_marginTop="10dp"
@@ -191,7 +314,7 @@
                         android:id="@+id/pay_account"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="입금 계좌"
+                        android:text="성신 1010 - 372 - 891011 (예금주 : 윗어스)"
                         android:gravity="right"
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="10dp"
