@@ -68,6 +68,7 @@ public class RegisterAgreementActivity extends AppCompatActivity {
                     //회원가입 화면으로 이동
                     Intent intent = new Intent(RegisterAgreementActivity.this, RegisterActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(0, 0);
                     finish();
                 }
                 //아닐 때
@@ -88,6 +89,7 @@ public class RegisterAgreementActivity extends AppCompatActivity {
                 //로그인 화면으로 이동
                 Intent intent = new Intent(RegisterAgreementActivity.this, LoginActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
                 finish();
             }
         });

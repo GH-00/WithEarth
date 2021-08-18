@@ -10,20 +10,25 @@
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/drawable/edge_bottom.xml" value="0.22604166666666667" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/drawable/edge_bottom_gray.xml" value="0.22604166666666667" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/drawable/edge_bottom_line.xml" value="0.22604166666666667" />
+        <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/drawable/edge_checkbox.xml" value="0.22604166666666667" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/drawable/edge_dotted_line.xml" value="0.264" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/drawable/edge_round.xml" value="0.22604166666666667" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/drawable/edge_round_darkgreen.xml" value="0.22604166666666667" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/drawable/edge_round_green.xml" value="0.22604166666666667" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/drawable/edge_top.xml" value="0.22604166666666667" />
-        <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_environment.xml" value="0.11820652173913043" />
+        <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_environment.xml" value="0.264" />
+        <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_home.xml" value="0.136" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_jjim.xml" value="0.12182971014492754" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_jjim_edit.xml" value="0.11820652173913043" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_jjim_unlogin.xml" value="0.2" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_main.xml" value="0.11684782608695653" />
+        <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_member_info.xml" value="0.16799999999999998" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_mypage.xml" value="0.264" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_mypage_collecting_using.xml" value="0.16" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_mypage_unlogin.xml" value="0.11820652173913043" />
+        <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_news1.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_pwd_check.xml" value="0.264" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_register.xml" value="0.264" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_register_agreement.xml" value="0.264" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_store.xml" value="0.264" />
@@ -34,6 +39,7 @@
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_store_order_success_items.xml" value="0.20989583333333334" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_store_product.xml" value="0.176" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_store_product_details.xml" value="0.2" />
+        <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/activity_user_info.xml" value="0.264" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/dialog_jjim.xml" value="0.264" />
         <entry key="..\:/Users/x__x73/AndroidStudioProjects/WithEarth/app/src/main/res/layout/toast_jjim.xml" value="0.4" />
       </map>

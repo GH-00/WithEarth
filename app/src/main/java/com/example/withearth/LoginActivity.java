@@ -95,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                                         }
                                     });
                             finish(); //현재 액티비티(=LoginActivity) 파괴
+                            overridePendingTransition(0, 0);
                         }
                         else {
                             //로그인 실패
@@ -118,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                 //첫 번째 인자 : 현재 액티비티, 두 번째 인자 : 이동할 액티비티
                 Intent intent = new Intent(LoginActivity.this, RegisterAgreementActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
                 finish();
 
             }

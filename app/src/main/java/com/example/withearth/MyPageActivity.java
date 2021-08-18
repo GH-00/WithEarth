@@ -158,6 +158,14 @@ public class MyPageActivity extends Fragment {
                 }
             });
 
+            Button btn_myinfo = (Button) view.findViewById(R.id.btn_myinfo);
+            btn_myinfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), PwdCheckActivity.class);
+                    startActivity(intent);
+                }
+            });
 
             //개인정보 수집 및 이용 버튼
             Button btn_collecting_using = (Button) view.findViewById(R.id.btn_collecting_using);

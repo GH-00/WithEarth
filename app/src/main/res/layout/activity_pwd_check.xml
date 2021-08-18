@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".PwdCheckActivity">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -27,7 +27,7 @@
             android:layout_marginLeft="5dp"
             android:fontFamily="@font/cafe24ssurroundair"
             android:gravity="center"
-            android:text="로그인"
+            android:text="내 정보"
             android:textColor="#292929"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -59,7 +59,7 @@
             android:background="@drawable/edge_top"
             android:orientation="horizontal"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="5dp">
 
 
             <TextView
@@ -69,32 +69,11 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="3.5"
-                android:text="아이디"
+                android:text="비밀번호 확인"
+                android:textStyle="bold"
                 android:textColor="#424242"
-                android:textSize="14dp" />
+                android:textSize="13dp" />
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/edge_all">
-
-                <EditText
-                    android:id="@+id/et_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:ems="10"
-                    android:hint="이메일을 입력하세요"
-                    android:inputType="textEmailAddress"
-                    android:textSize="15dp" />
-
-            </LinearLayout>
 
 
         </LinearLayout>
@@ -103,7 +82,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edge_top"
+            android:background="@color/white"
             android:orientation="horizontal"
             android:paddingTop="10dp"
             android:paddingBottom="10dp">
@@ -146,11 +125,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edge_top"
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_check"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -159,23 +137,11 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_stroke"
-                android:text="로그인"
+                android:text="확인"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn_register"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_stroke"
-                android:text="회원가입"
-                android:textColor="@color/black"
-                android:textSize="15dp"
-                android:textStyle="bold" />
 
         </LinearLayout>
 

@@ -22,9 +22,10 @@
         <activity android:name=".StoreActivityCosmetic" />
         <activity android:name=".StoreActivityFood" />
         <activity android:name=".StoreActivityClean" />
+        <activity android:name=".UserInfoActivity" />
         <activity android:name=".StoreActivityCloth" />
         <activity android:name=".StoreActivityCategory" />
-        <activity android:name=".MyPageActivityUnlogin" />
+        <activity android:name=".PwdCheckActivity" />
         <activity android:name=".StoreActivityOrderSuccess" />
         <activity android:name=".HomePointInfo" />
         <activity android:name=".SplashActivity">
