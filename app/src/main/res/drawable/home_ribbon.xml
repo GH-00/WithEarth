@@ -9,10 +9,10 @@
             <corners android:radius="10dp"/>
             <stroke
                 android:width="1.5dp"
-                android:color="#E16D9C"
+                android:color="#F6DC5E"
                 android:dashGap="4dp"
                 android:dashWidth="10dp"/>
-            <solid android:color="#FDB6C7" />
+            <solid android:color="#FFF6AA" />
         </shape>
     </item>
 </layer-list>

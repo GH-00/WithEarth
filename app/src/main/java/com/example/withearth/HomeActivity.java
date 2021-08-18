@@ -1,5 +1,6 @@
 package com.example.withearth;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,7 +9,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,10 +37,12 @@ import org.jetbrains.annotations.NotNull;
 public class HomeActivity extends Fragment {
 
     private View view;
-    private Button btn;
+    private ImageButton btn;
     private DatabaseReference databaseReference;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private FirebaseAuth mFirebaseAuth;
+
+    private ImageView tree1;
 
 
 
@@ -55,7 +61,7 @@ public class HomeActivity extends Fragment {
 
         view = inflater.inflate(R.layout.activity_home, container, false);
 
-        btn = (Button) view.findViewById(R.id.btn);
+        btn = (ImageButton) view.findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +88,8 @@ public class HomeActivity extends Fragment {
 
         });
 
+        //나무
+        tree1 = (ImageView) view.findViewById(R.id.tree1);
 
 
         return view;
