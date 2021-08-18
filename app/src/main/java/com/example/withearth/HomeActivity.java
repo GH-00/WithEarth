@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +18,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import static com.example.withearth.R.color.design_default_color_primary_dark;
+
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +34,11 @@ public class HomeActivity extends Fragment {
 
     private View view;
     private Button btn;
+    private DatabaseReference databaseReference;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private FirebaseAuth mFirebaseAuth;
+
+
 
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -49,6 +63,26 @@ public class HomeActivity extends Fragment {
                 startActivity(intent);
             }
         });
+
+        //포인트 출력하기
+        TextView point = view.findViewById(R.id.point);
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = database.getReference("Point").child(mFirebaseAuth.getCurrentUser().getUid());
+        databaseReference.child("point").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                String point_show = snapshot.getValue(String.class);
+                point.setText(point_show);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+
+        });
+
+
 
         return view;
     }

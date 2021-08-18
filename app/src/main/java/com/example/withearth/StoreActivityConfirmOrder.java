@@ -91,7 +91,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
                                     double doubletotalPoint = Double.parseDouble(totalPoint);
 
                                     realPoint = doubletotalPoint + finalpoint;
-                                    point = String.valueOf(realPoint);
+                                    point = String.valueOf((int) realPoint);
 
                                     HashMap<String, Object> pointMap = new HashMap<>();
                                     pointMap.put("point", point);
@@ -101,7 +101,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
                                 }
 
                                 else {
-                                    point = String.valueOf(finalpoint);
+                                    point = String.valueOf((int)finalpoint);
                                     HashMap<String, Object> pointMap = new HashMap<>();
                                     pointMap.put("point", point);
                                     pointRef.updateChildren(pointMap);
