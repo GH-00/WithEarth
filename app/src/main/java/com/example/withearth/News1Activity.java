@@ -1,9 +1,13 @@
 package com.example.withearth;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -22,6 +26,15 @@ public class News1Activity extends AppCompatActivity {
         setContentView(R.layout.activity_news1);
 
 
+        //커스텀 툴바 생성
+        Toolbar base_toolbar = findViewById(R.id.base_toolbar);
+        setSupportActionBar(base_toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
         WebView1 = (WebView) findViewById(R.id.webView1);
 
 
@@ -36,4 +49,20 @@ public class News1Activity extends AppCompatActivity {
         WebView1.loadUrl("https://www.eroun.net/news/articleView.html?idxno=24373");
 
     }
+
+
+    //툴바 뒤로가기 버튼 클릭 시
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
 }
