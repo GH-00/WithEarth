@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WithEarth"
         tools:replace="android:appComponentFactory, android:theme, android:icon">
-        <activity android:name=".RegisterCompletionActivity"></activity>
+        <activity android:name=".News2Activity"></activity>
+        <activity android:name=".News1Activity" />
+        <activity android:name=".MapActivity" />
+        <activity android:name=".RegisterCompletionActivity" />
         <activity android:name=".MyPageActivityCollectingUsing" />
         <activity android:name=".RegisterAgreementActivity" />
         <activity android:name=".StoreActivitySundries" />
@@ -45,6 +48,9 @@
             </intent-filter>
         </activity>
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBqYBsGLyvMP9A3W9gAnzYTORBCTCc4ETE" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
