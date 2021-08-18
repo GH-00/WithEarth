@@ -113,11 +113,12 @@ public class LoginActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //회원가입 버튼을 눌렀을 때의 처리 (= 회원가입 화면으로 이동)
+                //회원가입 버튼을 눌렀을 때의 처리 (= 회원가입 약관동의 화면으로 이동)
                 //Intent : 화면을 이동할 때 사용
                 //첫 번째 인자 : 현재 액티비티, 두 번째 인자 : 이동할 액티비티
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterAgreementActivity.class);
                 startActivity(intent);
+
             }
         });
     }
