@@ -34,16 +34,18 @@
     </androidx.appcompat.widget.Toolbar>
 
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/annie_use_your_telescope"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/cafe24ssurroundair"
         android:gravity="center"
         android:text="With Earth"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold" />
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -73,7 +75,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/btn_stroke"
+                        android:background="@drawable/edge_checkbox"
                         android:gravity="center"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
