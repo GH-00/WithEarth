@@ -130,8 +130,8 @@ public class RegisterActivity extends AppCompatActivity {
                                             }
                                         });
 
-                                //가입이 완료 시 가입 화면을 빠져나감
-                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                //가입이 완료 시 완료화면으로 이동
+                                Intent intent = new Intent(RegisterActivity.this, RegisterCompletionActivity.class);
                                 startActivity(intent);
                                 finish();
 
