@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         activity_jjim = new JJimActivity();
         activity_mypage = new MyPageActivity();
 
-        setFrag(0); //첫 프래그먼트 화면은 홈화면 (= 0번 화면)으로 지정
+        setFrag(1); //첫 프래그먼트 화면은 홈화면 (= 0번 화면)으로 지정
     }
 
     public void replaceFragment(Fragment fragment){

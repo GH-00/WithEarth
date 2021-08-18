@@ -92,7 +92,7 @@ public class MyPageActivity extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     String point = snapshot.getValue(String.class);
-                    tv_point.setText(point);
+                    tv_point.setText(point+" Point");
                 }
 
                 @Override
