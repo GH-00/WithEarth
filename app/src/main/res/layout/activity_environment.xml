@@ -53,12 +53,12 @@
                         android:layout_marginBottom="10dp"
                         android:layout_marginLeft="15dp"
                         android:layout_weight="1"
-                        android:background="#DFF4E1"
+                        android:background="#DEEADF"
                         android:gravity="center"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
                         android:text=" 성북구 비건 식당을 확인해보세요!\n굿데이서울, 투고샐러드, 카레경반,\n 샐러디, 크레센트"
-                        android:textColor="#83715A"
+                        android:textColor="#716453"
                         android:textSize="14dp" />
 
 

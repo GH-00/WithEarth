@@ -37,6 +37,7 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
     private FirebaseAuth auth;
     private TextView order_total_price, must_charge_tv;
     private TextView dateTime, orderTime;
+    private TextView address_tv, name_tv, phonenum_tv;
     private int orderNum, newNum;
     private String total;
     private Button keepShopBtn;
@@ -66,10 +67,35 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
             }
         });
 
+        orderNum = getIntent().getIntExtra("ordernum", orderNum);
+
+        address_tv = (TextView) findViewById(R.id.address_tv);
+        name_tv = (TextView) findViewById(R.id.name_tv);
+        phonenum_tv = (TextView) findViewById(R.id.phonenum_tv);
+
+        DatabaseReference getInfoRef = FirebaseDatabase.getInstance().getReference().child("Orders")
+                .child(auth.getCurrentUser().getUid()).child(String.valueOf(orderNum));
+        getInfoRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                String address = snapshot.child("address").getValue(String.class);
+                String name = snapshot.child("name").getValue(String.class);
+                String phonenum = snapshot.child("phone").getValue(String.class);
+
+                address_tv.setText(address);
+                name_tv.setText(name);
+                phonenum_tv.setText(phonenum);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
         must_charge_tv = (TextView) findViewById(R.id.must_charge_tv);
         order_total_price = (TextView) findViewById(R.id.order_total_price);
-
-        orderNum = getIntent().getIntExtra("ordernum", orderNum);
 
         DatabaseReference getPriceRef = FirebaseDatabase.getInstance().getReference().child("Orders")
                 .child(auth.getCurrentUser().getUid()).child(String.valueOf(orderNum));
