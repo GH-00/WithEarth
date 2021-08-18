@@ -88,7 +88,7 @@ public class MyPageActivity extends Fragment {
             //포인트 출력
             TextView tv_point = view.findViewById(R.id.tv_point);
             databaseReference = database.getReference("Point").child(mFirebaseAuth.getCurrentUser().getUid());
-            /*databaseReference.child("point").addValueEventListener(new ValueEventListener() {
+            databaseReference.child("point").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     String point = snapshot.getValue(String.class);
@@ -99,7 +99,7 @@ public class MyPageActivity extends Fragment {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });*/
+            });
 
 
             //로그아웃 버튼
