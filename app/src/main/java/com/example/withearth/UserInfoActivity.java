@@ -33,6 +33,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private FirebaseAuth mFirebaseAuth;
     private DatabaseReference databaseReference;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -129,30 +130,35 @@ public class UserInfoActivity extends AppCompatActivity {
 
                 databaseReference = database.getReference("Users").child(mFirebaseAuth.getCurrentUser().getUid());
 
-                //비밀번호가 같을 때
-                if (strPwd.equals(strPwdcheck)) {
+                //사용자가 비밀번호를 수정하려 했을 때
+                if ((strPwd != null) && (strPwdcheck != null)) {
+                    //비밀번호가 같을 때
+                    if (strPwd.equals(strPwdcheck)) {
+                        //비밀번호 업데이트
+                        //mFirebaseAuth.getCurrentUser().updatePassword(strPwd);
+                        //user.updatePassword(strPwd);
 
+                        //새 비밀번호 넣기 (overwrite)
+                        databaseReference.child("password").setValue(strPwd);
+                    }
+                    else{
+                        Toast.makeText(UserInfoActivity.this, "비밀번호가 일치하지 않아요.", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+                //사용자가 핸드폰 번호를 추가정보로 제공하려 했을 때
+                if (strEt_phonenumber != null) {
                     //핸드폰 번호 넣기
                     databaseReference.child("phone number").setValue(strEt_phonenumber);
-
-
-                    // *^^* 승현이 구역 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-                    //비밀번호 넣기
-
-
-
-
-                    //완료 시 이동
-                    Intent intent = new Intent(UserInfoActivity.this, MyPageActivity.class);
-                    startActivity(intent);
-                    finish();
-
-                    Toast.makeText(UserInfoActivity.this, "회원정보 수정이 완료되었어요.", Toast.LENGTH_SHORT);
-
                 }
-                else{
-                    Toast.makeText(UserInfoActivity.this, "비밀번호가 일치하지 않아요.", Toast.LENGTH_SHORT);
-                }
+
+
+                //완료 시 안내 문구 출력 후 이동
+                Toast.makeText(UserInfoActivity.this, "회원정보 수정이 완료되었어요.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UserInfoActivity.this, MyPageActivity.class);
+                startActivity(intent);
+                finish();
 
 
             }
@@ -166,13 +172,6 @@ public class UserInfoActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
-
-
-
-
 
 
 

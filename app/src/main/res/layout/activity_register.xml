@@ -141,7 +141,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:ems="10"
-                    android:hint="Name"
+                    android:hint="이름을 입력하세요"
                     android:inputType="text"
                     android:textSize="15dp" />
 
@@ -187,7 +187,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:ems="10"
-                    android:hint="Email"
+                    android:hint="이메일을 입력하세요"
                     android:inputType="textEmailAddress"
                     android:textSize="15dp" />
 
@@ -232,7 +232,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:ems="10"
-                    android:hint="Password"
+                    android:hint="비밀번호를 입력하세요"
                     android:inputType="textPassword"
                     android:textSize="15dp" />
 
@@ -276,7 +276,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:ems="10"
-                    android:hint="Password Check"
+                    android:hint="한 번 더 입력하세요"
                     android:inputType="textPassword"
                     android:textSize="15dp" />
 

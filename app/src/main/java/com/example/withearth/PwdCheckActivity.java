@@ -74,17 +74,13 @@ public class PwdCheckActivity extends AppCompatActivity {
 
                         }
                         else{
-                            Toast.makeText(PwdCheckActivity.this,"잘못된 비밀번호에요.",Toast.LENGTH_SHORT);
+                            Toast.makeText(PwdCheckActivity.this,"잘못된 비밀번호에요.",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
-
             }
-
-
         });
-
 
 
 

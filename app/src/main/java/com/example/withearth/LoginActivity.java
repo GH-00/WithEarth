@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;       //파이어베이스 인증
     private DatabaseReference mDatabaseRef;   //실시간 데이터베이스
     private EditText mEtEmail, mEtPwd;        //로그인 입력필드
-
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("withEarth");
+        mDatabaseRef = database.getReference("withEarth");
 
         mEtEmail = findViewById(R.id.et_email);  //연동
         mEtPwd = findViewById(R.id.et_pwd);      //연동
@@ -62,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                 //로그인 요청
                 String strEmail = mEtEmail.getText().toString();    //사용자가 입력한 값을 가져옴
                 String strPwd = mEtPwd.getText().toString();        // "
+
 
                 mFirebaseAuth.signInWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override

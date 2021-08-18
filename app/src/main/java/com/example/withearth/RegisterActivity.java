@@ -122,13 +122,11 @@ public class RegisterActivity extends AppCompatActivity {
                                                 if (snapshot.hasChild("ordernum")){
                                                     int value = snapshot.child("ordernum").getValue(int.class);
                                                     orderNum = value;
-
                                                 }
                                                 else{
                                                     HashMap<String, Object> numMap = new HashMap<>();
                                                     numMap.put("ordernum", 1);
                                                     numListRef.child("Orders").child(mFirebaseAuth.getCurrentUser().getUid()).updateChildren(numMap);
-
                                                 }
 
                                             }
