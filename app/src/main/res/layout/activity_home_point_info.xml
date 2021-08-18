@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_marginStart="6dp"
-                        android:layout_marginTop="17dp"
+                        android:layout_marginTop="19dp"
                         android:fontFamily="@font/cafe24surroundair"
                         android:text="@string/point1"
                         android:textColor="#000000"
@@ -115,12 +115,18 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_marginStart="6dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="25dp"
                         android:fontFamily="@font/cafe24surroundair"
                         android:text="@string/point2"
                         android:textColor="#000000"
                         android:textSize="12dp"
                         android:textStyle="normal" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="280dp"
+                        android:src="@drawable/process" />
 
                 </RelativeLayout>
 
