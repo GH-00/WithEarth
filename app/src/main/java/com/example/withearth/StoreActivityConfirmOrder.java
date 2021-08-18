@@ -36,7 +36,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
     private FirebaseAuth auth;
     private String point;
     private int orderNum;
-    private TextView totalPricetv, remainPointtv;
+    private TextView totalPricetv, remainPointtv, final_discount_price, final_product_price;
     String stOrderNum;
     String currentPoint;
     String usePoint;
@@ -68,6 +68,11 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
         totalPricetv = (TextView) findViewById(R.id.total_price_tv);
         remainPointtv = (TextView) findViewById(R.id.remain_point_tv);
         totalPricetv.setText(totalPrice);
+
+        final_discount_price = (TextView) findViewById(R.id.final_discount_price);
+        final_product_price = (TextView) findViewById(R.id.final_product_price);
+        final_product_price.setText(totalPrice + "원");
+        final_discount_price.setText("0원");
 
 
         DatabaseReference pointLoadRef = FirebaseDatabase.getInstance().getReference().child("Point")
@@ -108,7 +113,9 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
                         int intTotalPrice = Integer.parseInt(totalPrice);
                         int finalPrice = intTotalPrice - intUsePoint;
 
-                        totalPricetv.setText(String.valueOf((int) finalPrice));
+                        totalPricetv.setText(String.valueOf((int) finalPrice) +"원");
+                        final_discount_price.setText(usePoint + "원");
+
 
                         DatabaseReference newtotalRef = FirebaseDatabase.getInstance().getReference().child("Orders");
                         newtotalRef = newtotalRef.child(auth.getCurrentUser().getUid()).child(String.valueOf(orderNum));
@@ -155,8 +162,6 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
             }
         });
 
-
-        // 사용자 ordernum 가져오기
 
 
         confirmOrderBtn.setOnClickListener(new View.OnClickListener() {

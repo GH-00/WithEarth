@@ -77,8 +77,8 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 total = snapshot.child("total").getValue(String.class);
-                must_charge_tv.setText(total);
-                order_total_price.setText(total);
+                must_charge_tv.setText(total+"원");
+                order_total_price.setText(total+"원");
             }
 
             @Override

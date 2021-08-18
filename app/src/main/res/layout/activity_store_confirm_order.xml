@@ -6,7 +6,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".StoreActivityConfirmOrder">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -163,44 +169,108 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/method4"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="총 결제금액"
+            android:orientation="vertical"
+            android:background="@drawable/edge_bottom"
             android:layout_below="@+id/point_LL"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
-            android:textStyle="bold"/>
+            android:layout_marginTop="15dp">
 
-        <TextView
-            android:id="@+id/total_price_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="가격"
-            android:layout_toStartOf="@+id/won"
-            android:layout_below="@+id/point_LL"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
-            android:textStyle="bold"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/won"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="원"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/point_LL"
-            android:layout_marginRight="25dp"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="10dp"
-            android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/method4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="총 결제 금액"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/total_price_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="가격"
+                    android:gravity="end"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="25dp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="상품 금액"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="25dp"/>
+
+                <TextView
+                    android:id="@+id/final_product_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="가격"
+                    android:gravity="end"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="25dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="할인 금액"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="25dp"/>
+
+                <TextView
+                    android:id="@+id/final_discount_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="가격"
+                    android:gravity="end"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="25dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/confirm_final_order_btn"
@@ -214,9 +284,7 @@
             android:textStyle="bold"
             android:textSize="20dp"
             />
-
-
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>
