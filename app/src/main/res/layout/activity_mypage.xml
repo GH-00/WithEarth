@@ -64,9 +64,9 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:background="@drawable/edge_round"
             android:elevation="5dp">
 
@@ -78,6 +78,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:text="나의 포인트"
+                android:textStyle="bold"
                 android:textColor="#434343"
                 android:textSize="20dp" />
 
@@ -99,7 +100,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/edge_top">
 
             <TextView
@@ -124,8 +125,8 @@
                 android:id="@+id/btn_myinfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
                 android:background="@drawable/btn_white"
                 android:gravity="left|center_vertical"
                 android:paddingLeft="15dp"
@@ -143,8 +144,8 @@
                 android:id="@+id/btn_collecting_using"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
                 android:background="@drawable/edge_bottom_line"
                 android:gravity="left|center_vertical"
                 android:paddingLeft="15dp"
@@ -159,7 +160,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
         <Button
@@ -169,12 +170,11 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/edge_round_black"
-            android:backgroundTint="@color/black"
+            android:layout_weight="4"
+            android:background="@drawable/btn_edgebottom"
             android:text="로그아웃"
-            android:textColor="@color/white"
-            android:textSize="15dp"
+            android:textColor="#62AF72"
+            android:textSize="13dp"
             android:textStyle="bold" />
 
         <Button
@@ -184,13 +184,18 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:background="@drawable/edge_round_black"
-            android:backgroundTint="@color/black"
+            android:layout_weight="4"
+            android:background="@drawable/btn_edgebottom"
             android:text="회원 탈퇴"
-            android:textColor="@color/white"
-            android:textSize="15dp"
+            android:textColor="#62AF72"
+            android:textSize="13dp"
             android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2.2"/>
+
     </LinearLayout>
 
 </LinearLayout>

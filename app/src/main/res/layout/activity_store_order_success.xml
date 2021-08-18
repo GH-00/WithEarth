@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EAEAEA"
     android:orientation="vertical"
     tools:context=".StoreActivityOrderSuccess">
 
@@ -19,11 +20,14 @@
                 android:id="@+id/success_LL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edge_bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edge_dotted_line"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_marginTop="80dp"
+                    android:layout_marginTop="45dp"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/store_check"
@@ -38,15 +42,16 @@
                     android:textAlignment="center"
                     android:textSize="30dp"
                     android:textStyle="bold"
+                    android:background="@drawable/edge_bottom_gray"
                     android:layout_marginTop="20dp"
-                    android:layout_marginBottom="8dp"/>
+                    android:paddingBottom="10dp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="20dp">
+                    android:layout_gravity="center" >
 
                     <TextView
                         android:id="@+id/order_time"
@@ -72,6 +77,37 @@
 
 
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="결제 금액"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:textSize="13dp"/>
+
+                    <TextView
+                        android:id="@+id/order_total_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Price"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        android:textSize="13dp"/>
+
+
+                </LinearLayout>
+
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -86,11 +122,14 @@
 
                 <TextView
                     android:id="@+id/order_list"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/edge_bottom_gray"
                     android:text="주문 내역"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="20dp"
+                    android:paddingBottom="10dp"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold"/>
@@ -119,9 +158,12 @@
 
                 <TextView
                     android:id="@+id/pay_info"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="입금 안내"
+                    android:background="@drawable/edge_bottom_gray"
+                    android:paddingBottom="10dp"
+                    android:layout_marginRight="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:textColor="@color/black"
@@ -235,10 +277,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/edge_top"
         android:orientation="horizontal">
 
@@ -247,7 +285,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginRight="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:background="@drawable/edge_round_black"
             android:text="계속 쇼핑하기"
@@ -262,7 +303,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginRight="5dp"
+            android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:background="@drawable/edge_round_black"
             android:text="주문상세 보기"

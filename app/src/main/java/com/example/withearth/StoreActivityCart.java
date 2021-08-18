@@ -120,7 +120,7 @@ public class StoreActivityCart extends AppCompatActivity {
 
                 int oneTyprProductTPrice = ((Integer.valueOf(model.getPrice()))) * Integer.valueOf(model.getQuantity());
                 overTotalPrice = overTotalPrice + oneTyprProductTPrice;
-                txtTotalAmount.setText("총" + String.valueOf(overTotalPrice)+"원");
+                txtTotalAmount.setText(String.valueOf(overTotalPrice)+"원");
 
                 // 주문하기 버튼 누르면 StoreActivityConfirmOrder로 이동
                 // Cart List에 담긴 장바구니 목록을 모두 Orders -  회원 ID - order Num -  products로 이동

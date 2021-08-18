@@ -37,6 +37,7 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
     private FirebaseAuth auth;
     private int overTotalPrice = 0;
     private TextView txtTotalAmount;
+    private TextView order_product_price;
     private TextView dateTime, orderTime;
     private int orderNum, newNum;
     private Button keepShopBtn;
@@ -68,6 +69,9 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
         txtTotalAmount = (TextView) findViewById(R.id.must_charge_tv);
 
         orderNum = getIntent().getIntExtra("ordernum", orderNum);
+
+        order_product_price = (TextView) findViewById(R.id.order_product_price);
+
 
 
         Calendar currentCal = Calendar.getInstance();
@@ -108,6 +112,7 @@ public class StoreActivityOrderSuccess extends AppCompatActivity {
                 int oneTyprProductPrice = ((Integer.valueOf(model.getPrice()))) * Integer.valueOf(model.getQuantity());
                 overTotalPrice = overTotalPrice + oneTyprProductPrice;
                 txtTotalAmount.setText(String.valueOf(overTotalPrice));
+                order_product_price.setText(String.valueOf(overTotalPrice));
 
             }
 
