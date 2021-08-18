@@ -6,12 +6,12 @@
     <application
         android:allowBackup="true"
         android:appComponentFactory="whateverString"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_with_earth_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_with_earth_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WithEarth"
-        tools:replace="android:appComponentFactory, android:theme">
+        tools:replace="android:appComponentFactory, android:theme, android:icon">
         <activity android:name=".MyPageActivityCollectingUsing"></activity>
         <activity android:name=".StoreActivitySundries" />
         <activity android:name=".StoreActivityCosmetic" />
