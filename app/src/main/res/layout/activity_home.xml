@@ -60,7 +60,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/tree1"
+                android:id="@+id/iv_tree"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
                 android:layout_marginBottom="100dp"

@@ -42,7 +42,7 @@ public class HomeActivity extends Fragment {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private FirebaseAuth mFirebaseAuth;
 
-    private ImageView tree1;
+    private ImageView iv_tree;
 
 
 
@@ -70,15 +70,36 @@ public class HomeActivity extends Fragment {
             }
         });
 
+
+        //나무
+        iv_tree = (ImageView) view.findViewById(R.id.iv_tree);
+
         //포인트 출력하기
         TextView point = view.findViewById(R.id.point);
         mFirebaseAuth = FirebaseAuth.getInstance();
         databaseReference = database.getReference("Point").child(mFirebaseAuth.getCurrentUser().getUid());
+
         databaseReference.child("point").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 String point_show = snapshot.getValue(String.class);
                 point.setText(point_show);
+                int intPoint = Integer.parseInt(point_show);
+                if (intPoint<10000){
+                    iv_tree.setImageResource(R.drawable.tree1);
+                }
+                else if(intPoint<30000){
+                    iv_tree.setImageResource(R.drawable.tree2);
+                }
+                else if(intPoint<50000){
+                    iv_tree.setImageResource(R.drawable.tree3);
+                }
+                else if(intPoint<70000){
+                    iv_tree.setImageResource(R.drawable.tree4);
+                }
+                else
+                    iv_tree.setImageResource(R.drawable.tree5);
+
             }
 
             @Override
@@ -88,8 +109,6 @@ public class HomeActivity extends Fragment {
 
         });
 
-        //나무
-        tree1 = (ImageView) view.findViewById(R.id.tree1);
 
 
         return view;
