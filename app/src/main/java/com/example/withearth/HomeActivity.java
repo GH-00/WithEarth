@@ -88,13 +88,13 @@ public class HomeActivity extends Fragment {
                 if (intPoint<10000){
                     iv_tree.setImageResource(R.drawable.tree1);
                 }
-                else if(intPoint<30000){
+                else if(intPoint>=10000 && intPoint<30000){
                     iv_tree.setImageResource(R.drawable.tree2);
                 }
-                else if(intPoint<50000){
+                else if(intPoint>=30000 && intPoint<50000){
                     iv_tree.setImageResource(R.drawable.tree3);
                 }
-                else if(intPoint<70000){
+                else if(intPoint>=50000 &&intPoint<70000){
                     iv_tree.setImageResource(R.drawable.tree4);
                 }
                 else
