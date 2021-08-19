@@ -5,21 +5,11 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="70dp"
-        android:gravity="center"
-        android:text="♥ 마이페이지 ♥"
-        android:textColor="#575757"
-        android:textSize="15dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="40dp"
         android:gravity="center"
-        android:text="로그인 후 이용하세요."
+        android:text="로그인 후 이용 가능합니다."
         android:textSize="15dp"
         android:textColor="#575757" />
     <Button

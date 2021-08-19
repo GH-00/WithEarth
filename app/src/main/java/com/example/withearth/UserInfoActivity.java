@@ -136,7 +136,6 @@ public class UserInfoActivity extends AppCompatActivity {
                 if ((!strPwd.isEmpty()) && (!strPwdcheck.isEmpty())) {
                     //비밀번호가 같을 때
                     if (strPwd.equals(strPwdcheck)) {
-
                         //비밀번호 업데이트
                         FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
                         mFirebaseUser.updatePassword(strPwd)
@@ -144,31 +143,28 @@ public class UserInfoActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-
+                                            //비밀번호 넣기
                                             databaseReference.child("password").setValue(strPwd);
-                                            //사용자가 핸드폰 번호를 추가정보로 제공하려 했을 때
-                                            if (!strEt_phonenumber.isEmpty()) {
-                                                //핸드폰 번호 넣기
-                                                databaseReference.child("phone number").setValue(strEt_phonenumber);
-                                            }
                                         }
-                                        else { }
-
                                     }
                                 });
-
-                        //완료 시 안내 문구 출력 후 이동
-                        Toast.makeText(UserInfoActivity.this, "회원정보 수정이 완료되었어요.", Toast.LENGTH_SHORT).show();
-                        finish();
 
                     } else {
                         Toast.makeText(UserInfoActivity.this, "비밀번호가 일치하지 않아요.", Toast.LENGTH_SHORT).show();
                     }
 
                 }
-                else
-                    Toast.makeText(UserInfoActivity.this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
 
+
+                //사용자가 핸드폰 번호를 추가정보로 제공하려 했을 때
+                if (!strEt_phonenumber.isEmpty()) {
+                    //핸드폰 번호 넣기
+                    databaseReference.child("phone number").setValue(strEt_phonenumber);
+                }
+
+                //완료 시 안내 문구 출력 후 이동
+                Toast.makeText(UserInfoActivity.this, "회원정보 수정이 완료되었어요.", Toast.LENGTH_SHORT).show();
+                finish();
 
             }
         });
