@@ -23,6 +23,7 @@
         <activity android:name=".StoreActivityFood" />
         <activity android:name=".StoreActivityClean" />
         <activity android:name=".UserInfoActivity" />
+        <activity android:name=".StoreActivityCartUnlogin"/>
         <activity android:name=".StoreActivityCloth" />
         <activity android:name=".StoreActivityCategory" />
         <activity android:name=".StoreActivityCartUnlogin" />
