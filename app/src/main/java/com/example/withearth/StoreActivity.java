@@ -93,6 +93,7 @@ public class StoreActivity extends Fragment {
         recyclerView.setAdapter(storeActivityMyAdapter);
         EventChangeListener();
 
+        //검색 버튼
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +102,7 @@ public class StoreActivity extends Fragment {
             }
         });
 
+        //카테고리 버튼
         categoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

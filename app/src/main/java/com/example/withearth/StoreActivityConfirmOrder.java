@@ -40,15 +40,15 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
     private String point;
     private int orderNum;
     private TextView totalPricetv, remainPointtv, final_discount_price, final_product_price;
-    String stOrderNum;
-    String currentPoint;
-    String usePoint;
-    String finalRemainPoint;
-    String totalPrice;
+    private String stOrderNum;
+    private String currentPoint;
+    private String usePoint;
+    private String finalRemainPoint;
+    private String totalPrice;
 
-    int intCurrentPoint;
-    double realPoint;
-    int intUsePoint, intFinalRemainPoint;
+    private int intCurrentPoint;
+    private double realPoint;
+    private int intUsePoint, intFinalRemainPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +88,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
         final_discount_price.setText("0원");
 
 
+        //포인트 가져오기
         DatabaseReference pointLoadRef = FirebaseDatabase.getInstance().getReference().child("Point")
                 .child(auth.getCurrentUser().getUid());
         pointLoadRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -106,6 +107,7 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
             }
         });
 
+        //포인트 사용하기 버튼
         usePointBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,9 +179,11 @@ public class StoreActivityConfirmOrder extends AppCompatActivity {
 
 
 
+        //주문하기 버튼
         confirmOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //정보 입력 여부 체크 함수
                 Check();
 
                 //구매 금액의 5% 포인트 적립
