@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/home_ribbon"
             android:elevation="8dp"
@@ -56,24 +56,31 @@
         </LinearLayout>
 
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/iv_tree"
                 android:layout_width="match_parent"
-                android:layout_height="364dp"
+                android:layout_height="280dp"
+                android:layout_above="@+id/half_earth"
                 android:src="@drawable/tree1" />
 
             <ImageView
                 android:id="@+id/half_earth"
                 android:layout_width="match_parent"
-                android:layout_height="256dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
                 android:layout_gravity="bottom"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="-7dp"
+                android:adjustViewBounds="true"
                 android:src="@drawable/half_earth" />
 
-        </FrameLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 

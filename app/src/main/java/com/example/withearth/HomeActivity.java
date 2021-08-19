@@ -74,6 +74,7 @@ public class HomeActivity extends Fragment {
         //나무
         iv_tree = (ImageView) view.findViewById(R.id.iv_tree);
 
+
         //포인트 출력하기
         TextView point = view.findViewById(R.id.point);
         mFirebaseAuth = FirebaseAuth.getInstance();
