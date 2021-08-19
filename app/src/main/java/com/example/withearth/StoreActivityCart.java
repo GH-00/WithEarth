@@ -181,11 +181,11 @@ public class StoreActivityCart extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         CharSequence options[] = new CharSequence[]{
-                                "Remove"
+                                "삭제하기"
 
                         };
                         AlertDialog.Builder builder = new AlertDialog.Builder(StoreActivityCart.this);
-                        builder.setTitle("Cart Options: ");
+                        builder.setTitle("장바구니 옵션: ");
 
                         builder.setItems(options, new DialogInterface.OnClickListener() {
                             @Override

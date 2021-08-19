@@ -45,7 +45,6 @@ public class StoreActivityProductDetails extends AppCompatActivity {
     private ImageView productImage;
     private TextView productPrice;
     private TextView productName;
-    private TextView productDescription;
     private Button addToCartButton;
     private Button purchaseButton;
     private ElegantNumberButton numberButton;
@@ -87,7 +86,6 @@ public class StoreActivityProductDetails extends AppCompatActivity {
         pImage = getIntent().getStringExtra("image");
 
         productImage = (ImageView) findViewById(R.id.product_image_details);
-        productDescription = (TextView) findViewById(R.id.product_description_details);
         productName = (TextView) findViewById(R.id.product_name_details);
         productPrice = (TextView) findViewById(R.id.product_price_details);
 
@@ -96,9 +94,9 @@ public class StoreActivityProductDetails extends AppCompatActivity {
 
         productName.setText(pName);
         productPrice.setText(pPrice);
-        productDescription.setText(pDescription);
         Picasso.get().load(pImage).into(productImage);
 
+        //ordernum 불러오기
         DatabaseReference numListRef = FirebaseDatabase.getInstance().getReference();
         numListRef.child("Orders").child(auth.getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener(){
