@@ -30,7 +30,7 @@ public class HomeActivityUnlogin extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.activity_environment_unlogin, container, false);
+        view = inflater.inflate(R.layout.activity_home_unlogin, container, false);
 
         Button btn_gologin = (Button) view.findViewById(R.id.btn_gologin);
         btn_gologin.setOnClickListener(new View.OnClickListener() {
