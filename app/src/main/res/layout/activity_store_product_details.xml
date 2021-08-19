@@ -66,16 +66,6 @@
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/product_description_details"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/product_name_details"
-                android:gravity="center"
-                android:text="product description"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/product_price_details"

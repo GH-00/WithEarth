@@ -420,26 +420,6 @@
             android:textStyle="bold"
             />
 
-
-        <Button
-            android:id="@+id/look_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:background="@drawable/edge_round_black"
-            android:text="주문상세 보기"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            android:textStyle="bold"
-
-            />
-
-
     </LinearLayout>
 
 </LinearLayout>
