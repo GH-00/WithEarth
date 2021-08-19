@@ -45,10 +45,10 @@ public class HomeActivity extends Fragment {
     private ImageView iv_tree;
 
 
-
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFirebaseAuth = FirebaseAuth.getInstance();
         setHasOptionsMenu(true);
     }
 
@@ -56,59 +56,61 @@ public class HomeActivity extends Fragment {
     @org.jetbrains.annotations.Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.activity_home, container, false);
 
-        btn = (ImageButton) view.findViewById(R.id.btn);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), HomePointInfo.class);
-                startActivity(intent);
-            }
-        });
 
+        //로그인 했을 시
+        if (mFirebaseAuth.getCurrentUser() != null) {
 
-        //나무
-        iv_tree = (ImageView) view.findViewById(R.id.iv_tree);
-
-
-        //포인트 출력하기
-        TextView point = view.findViewById(R.id.point);
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        databaseReference = database.getReference("Point").child(mFirebaseAuth.getCurrentUser().getUid());
-
-        databaseReference.child("point").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                String point_show = snapshot.getValue(String.class);
-                point.setText(point_show);
-                int intPoint = Integer.parseInt(point_show);
-                if (intPoint<10000){
-                    iv_tree.setImageResource(R.drawable.tree1);
+            btn = (ImageButton) view.findViewById(R.id.btn);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), HomePointInfo.class);
+                    startActivity(intent);
                 }
-                else if(intPoint>=10000 && intPoint<30000){
-                    iv_tree.setImageResource(R.drawable.tree2);
+            });
+
+
+            //나무
+            iv_tree = (ImageView) view.findViewById(R.id.iv_tree);
+
+
+            //포인트 출력하기
+            TextView point = view.findViewById(R.id.point);
+            mFirebaseAuth = FirebaseAuth.getInstance();
+            databaseReference = database.getReference("Point").child(mFirebaseAuth.getCurrentUser().getUid());
+
+            databaseReference.child("point").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    String point_show = snapshot.getValue(String.class);
+                    point.setText(point_show);
+                    int intPoint = Integer.parseInt(point_show);
+                    if (intPoint < 10000) {
+                        iv_tree.setImageResource(R.drawable.tree1);
+                    } else if (intPoint >= 10000 && intPoint < 30000) {
+                        iv_tree.setImageResource(R.drawable.tree2);
+                    } else if (intPoint >= 30000 && intPoint < 50000) {
+                        iv_tree.setImageResource(R.drawable.tree3);
+                    } else if (intPoint >= 50000 && intPoint < 70000) {
+                        iv_tree.setImageResource(R.drawable.tree4);
+                    } else
+                        iv_tree.setImageResource(R.drawable.tree5);
+
                 }
-                else if(intPoint>=30000 && intPoint<50000){
-                    iv_tree.setImageResource(R.drawable.tree3);
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
                 }
-                else if(intPoint>=50000 &&intPoint<70000){
-                    iv_tree.setImageResource(R.drawable.tree4);
-                }
-                else
-                    iv_tree.setImageResource(R.drawable.tree5);
 
-            }
+            });
 
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-
-        });
-
-
+        } else {
+            HomeActivityUnlogin homeActivityUnlogin = new HomeActivityUnlogin();
+            ((MainActivity) getActivity()).replaceFragment(homeActivityUnlogin);
+        }
 
         return view;
     }
@@ -128,8 +130,8 @@ public class HomeActivity extends Fragment {
                 startActivity(intent);
                 return true;
 
-            default :
-                return super.onOptionsItemSelected(item) ;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
