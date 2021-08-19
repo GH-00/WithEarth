@@ -290,7 +290,7 @@
                     android:layout_marginRight="10dp"
                     android:ems="10"
                     android:hint="전화번호 (예시) 01012345678"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:textSize="15dp" />
 
 

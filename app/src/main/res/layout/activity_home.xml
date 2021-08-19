@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -17,7 +18,6 @@
             android:layout_marginTop="28dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/home_ribbon"
-            android:elevation="8dp"
             android:orientation="horizontal"
             android:paddingTop="25dp"
             android:paddingBottom="25dp">
@@ -28,8 +28,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_gravity="center"
                 android:fontFamily="@font/cafe24surroundair"
-                android:gravity="right"
+                android:gravity="right|center_vertical"
                 android:text="point"
                 android:textColor="@color/black"
                 android:textSize="33dp"
@@ -38,13 +39,14 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1">
 
 
                 <ImageButton
                     android:id="@+id/btn"
                     android:layout_width="wrap_content"
-                    android:layout_height="37dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="12dp"
                     android:background="#00FFFFFF"

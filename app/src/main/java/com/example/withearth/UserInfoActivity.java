@@ -17,6 +17,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -67,7 +69,8 @@ public class UserInfoActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
         });
 
 
@@ -75,7 +78,6 @@ public class UserInfoActivity extends AppCompatActivity {
         EditText et_phonenumber = (EditText) findViewById(R.id.et_phonenumber);
         EditText et_pwd = (EditText) findViewById(R.id.et_pwd);
         EditText et_pwd_check = (EditText) findViewById(R.id.et_pwd_check);
-
 
 
         //탈퇴 버튼
@@ -118,7 +120,7 @@ public class UserInfoActivity extends AppCompatActivity {
             }
         });
 
-        
+
         //수정 버튼
         Button btn_edit = (Button) findViewById(R.id.btn_edit);
         btn_edit.setOnClickListener(new View.OnClickListener() {
@@ -131,34 +133,41 @@ public class UserInfoActivity extends AppCompatActivity {
                 databaseReference = database.getReference("Users").child(mFirebaseAuth.getCurrentUser().getUid());
 
                 //사용자가 비밀번호를 수정하려 했을 때
-                if ((strPwd != null) && (strPwdcheck != null)) {
+                if ((!strPwd.isEmpty()) && (!strPwdcheck.isEmpty())) {
                     //비밀번호가 같을 때
                     if (strPwd.equals(strPwdcheck)) {
-                        //비밀번호 업데이트
-                        //mFirebaseAuth.getCurrentUser().updatePassword(strPwd);
-                        //user.updatePassword(strPwd);
 
-                        //새 비밀번호 넣기 (overwrite)
-                        databaseReference.child("password").setValue(strPwd);
-                    }
-                    else{
+                        //비밀번호 업데이트
+                        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
+                        mFirebaseUser.updatePassword(strPwd)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+
+                                            databaseReference.child("password").setValue(strPwd);
+                                            //사용자가 핸드폰 번호를 추가정보로 제공하려 했을 때
+                                            if (!strEt_phonenumber.isEmpty()) {
+                                                //핸드폰 번호 넣기
+                                                databaseReference.child("phone number").setValue(strEt_phonenumber);
+                                            }
+                                        }
+                                        else { }
+
+                                    }
+                                });
+
+                        //완료 시 안내 문구 출력 후 이동
+                        Toast.makeText(UserInfoActivity.this, "회원정보 수정이 완료되었어요.", Toast.LENGTH_SHORT).show();
+                        finish();
+
+                    } else {
                         Toast.makeText(UserInfoActivity.this, "비밀번호가 일치하지 않아요.", Toast.LENGTH_SHORT).show();
                     }
 
                 }
-
-                //사용자가 핸드폰 번호를 추가정보로 제공하려 했을 때
-                if (strEt_phonenumber != null) {
-                    //핸드폰 번호 넣기
-                    databaseReference.child("phone number").setValue(strEt_phonenumber);
-                }
-
-
-                //완료 시 안내 문구 출력 후 이동
-                Toast.makeText(UserInfoActivity.this, "회원정보 수정이 완료되었어요.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(UserInfoActivity.this, MyPageActivity.class);
-                startActivity(intent);
-                finish();
+                else
+                    Toast.makeText(UserInfoActivity.this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -174,14 +183,13 @@ public class UserInfoActivity extends AppCompatActivity {
         });
 
 
-
     }
 
 
     //툴바 뒤로가기 버튼 클릭 시
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
