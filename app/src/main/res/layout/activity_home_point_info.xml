@@ -37,7 +37,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="12dp"
                     app:cardCornerRadius="4dp">
 
@@ -57,28 +57,35 @@
                             android:textSize="15dp"
                             android:textStyle="bold" />
 
-                        <RelativeLayout
+                        <ScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginStart="-8dp"
-                            android:layout_marginTop="-2dp"
-                            android:padding="10dp">
+                            android:layout_height="match_parent">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:layout_alignParentStart="true"
-                                android:layout_marginStart="6dp"
-                                android:layout_marginTop="19dp"
-                                android:fontFamily="@font/cafe24surroundair"
-                                android:text="@string/point1"
-                                android:textColor="#000000"
-                                android:textSize="12dp"
-                                android:textStyle="normal" />
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="-8dp"
+                                android:layout_marginTop="-2dp"
+                                android:padding="10dp">
 
-                        </RelativeLayout>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_marginStart="6dp"
+                                    android:layout_marginTop="19dp"
+                                    android:fontFamily="@font/cafe24surroundair"
+                                    android:text="@string/point1"
+                                    android:textColor="#000000"
+                                    android:textSize="12dp"
+                                    android:textStyle="normal" />
+
+                            </RelativeLayout>
+
+                        </ScrollView>
+
 
                     </RelativeLayout>
 
@@ -87,7 +94,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="470dp"
+                    android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="4dp">
 
@@ -107,34 +114,41 @@
                             android:textSize="15dp"
                             android:textStyle="bold" />
 
-
-                        <RelativeLayout
+                        <ScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginTop="-2dp"
-                            android:padding="10dp">
+                            android:layout_height="match_parent">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:layout_alignParentStart="true"
-                                android:layout_marginStart="6dp"
-                                android:layout_marginTop="25dp"
-                                android:fontFamily="@font/cafe24surroundair"
-                                android:text="@string/point2"
-                                android:textColor="#000000"
-                                android:textSize="12dp"
-                                android:textStyle="normal" />
+                                android:layout_alignParentTop="true"
+                                android:layout_marginTop="-2dp"
+                                android:padding="10dp">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="280dp"
-                                android:src="@drawable/process" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_marginStart="6dp"
+                                    android:layout_marginTop="25dp"
+                                    android:fontFamily="@font/cafe24surroundair"
+                                    android:text="@string/point2"
+                                    android:textColor="#000000"
+                                    android:textSize="12dp"
+                                    android:textStyle="normal" />
 
-                        </RelativeLayout>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="280dp"
+                                    android:src="@drawable/process" />
+
+                            </RelativeLayout>
+
+                        </ScrollView>
+
 
                     </RelativeLayout>
 
